@@ -1,0 +1,22 @@
+<div class="container p-5">
+  <div class="dvise_frame" style="max-width: 500px; margin: 0 auto;">
+    <h2 class="text-center mb-5">ログイン</h2>
+    <div class="devise_inner">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field mb-3 w-100 row ml-0 mr-0">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"メールアドレス",class:"col-10 form-control"%>
+        </div>
+        <div class="field mb-3 w-100 row ml-0 mr-0">
+          <%= f.password_field :password, autocomplete: "current-password" ,placeholder:"パスワード",class:"col-10 form-control"%>
+        </div>
+        <div class="actions mb-1 w-100 row ml-0 mr-0" >
+          <%= f.submit "ログイン", class:" p-2 m-1 btn-outline-success text-white bg-success rounded col-12 form-control" %>
+        </div>
+        <div class="text-center" >
+          <%= link_to "新しいアカウントを作成","/users/sign_up",class:"text-success sign_in_link"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

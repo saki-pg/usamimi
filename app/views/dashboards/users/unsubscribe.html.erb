@@ -1,0 +1,44 @@
+<div class="container p-3">
+  <% unless current_user.email == 'guest_user@example.com' %>
+    <div class="bg-light p-5 rounded my-4">
+      <h2 class="col-12 ms-2">退会お手続き</h2>
+    </div>
+    <p>
+      退会手続きをされますと、全てのサービスがご利用いただけなくなります。<br>
+      同じメールアドレスでの再登録は出来ません。
+
+      再度ご利用をいただく場合には、新規登録のお手続きが必要になります。<br>
+      以下のアカウントを退会してよろしいですか？
+    </p>
+    <h3><%= current_user.email %></h3>
+    <div class="d-flex">
+      <!-- Changed here -->
+      <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#confirmModal">退会する</button>
+      <%= link_to '退会しない', root_path, class:'link-dark btn btn-light'%>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">退会の確認</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            本当に退会しますか？
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+            <!-- Changed here -->
+            <%= link_to '退会する', withdrawal_path(current_user), method: :patch, class: 'btn btn-danger' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="p-5">
+      <h4>ゲストユーザーのため、退会することはできません。</h4>
+    </div>
+  <% end %>
+</div>

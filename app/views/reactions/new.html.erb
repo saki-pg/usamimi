@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="bg-light p-5 rounded my-4">
+    <h2>返信する</h2>
+  </div>
+
+  <%= form_with(model: @reaction, url: answer_reactions_path(@reaction.answer.id), local: true) do |form| %>
+    <% if @reaction.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@reaction.errors.count, "error") %> prohibited this reaction from being saved:</h2>
+
+        <ul>
+          <% @reaction.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- ここにもuser_idを入れておかないとparamsに入らない -->
+    <%= form.hidden_field :user_id, value: current_user.id %>
+
+    <div class="field mb-3 w-100 row ml-0 mr-0">
+      <%= form.label :body, '返信' %>
+      <%= form.text_area :body %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit '投稿', class: 'btn btn-success'  %>
+    </div>
+  <% end %>
+</div>
+

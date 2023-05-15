@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Usamimi</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag('favicon.png') %>
+  </head>
+
+
+  <body>
+    <header class="bg-light">
+      <!-- Navigation -->
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between p-1 px-md-4 header-container shadow-sm">
+
+        <div class="header-left-container d-flex">
+          <%= link_to root_path do %>
+            <%= image_tag("logo.png", height: '50px', class: "navbar-brand my-0 font-weight-normal", id: "home-logo", alt: "ロゴ") %>
+          <% end %>
+          <div class="header-search-container mt-3">
+            <div class="header-search-box">
+              <%= form_with url: questions_search_path,method: :get,local: true do |f| %>
+                <%= f.text_field :keyword ,placeholder:"キーワード検索",class:"header-search-input"%>
+                <% submit_tag %>
+              <% end %>
+              <i class="fas fa-search "></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-right-container">
+          <% if user_signed_in? %>
+            <div class="header-elements-container d-flex align-items-center">
+              <%= link_to '質問する！', new_question_path, class: 'btn btn-success' %>
+              <div class="p-2 m-1 header-user-name"><%= current_user.name %></div>
+
+              <div class="dropdown">
+                <button type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="user_header_image nav-item p-2 m-1">
+                    <% if current_user.image.attached? %>
+                      <%= image_tag current_user.image, class: "rounded-circle", size: "60x60" %>
+                    <%else%>
+                      <%= image_tag "rabbit_logo.png", class: "rounded-circle", size: "60x60" %>
+                    <%end%>
+                  </div>
+                </button>
+
+                <ul class="p-2 mb-0 user_header_nav dropdown-menu" aria-labelledby="dropdownMenuButton" >
+                  <li class="mb-1"><%= link_to "設定", account_path, class: "nav-link dropdown-item"%></li>
+                  <li class="mb-1"><%= link_to "質問投稿", questions_path, class: "nav-link dropdown-item" %></li>
+                  <li class="mb-1"><%= link_to "回答投稿", answers_path, class: "nav-link dropdown-item" %></li>
+                  <li class="mb-1"><%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link dropdown-item" %></li>
+                  <li class="mb-1"><%= button_to '退会する', unsubscribe_path(current_user), method: :get, class: "nav-link dropdown-item" %></li>
+                </ul>
+              </div>
+            </div>
+          <% else %>
+            <div class="d-flex justify-content-center p-1">
+              <%= button_to "ゲストログイン", users_guest_sign_in_path, class:"home-link-user p-2 m-1 btn btn-outline-warning text-white bg-warning", method: :post %>
+              <%= link_to"ログイン", new_user_session_path, class:"home-link-user p-2 m-1 btn btn-outline-success text-white bg-success" %>
+              <%= link_to"新規登録", new_user_registration_path, class:"home-link-user p-2 m-1 btn btn-outline-success text-white bg-success" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          let userHeaderImage = document.querySelector('.user_header_image');
+          let userHeadNav = document.querySelector('.user_headnav');
+
+          if (userHeaderImage) {
+            userHeadNav.style.display = 'none';
+
+            userHeaderImage.addEventListener('click', function () {
+              if (userHeadNav.style.display === 'none') {
+                userHeadNav.style.display = 'block';
+              } else {
+                userHeadNav.style.display = 'none';
+              }
+            });
+          }
+        });
+      </script>
+
+
+      <%# <script>
+        $('.user_headnav').hide();
+        $('.user_header_image').on('click',function(){
+          $('.user_headnav').slideToggle();
+        })
+      </script> %>
+    </header>
+
+    <main>
+      <div class="clearfix">
+        <%= notice %>
+        <%= alert %>
+      </div>
+      <%= yield %>
+    </main>
+
+    <footer class="py-3 bg-light">
+      <div class="container">
+        <p class="m-0 text-center text-black">2023 Usamimi</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+
+  </body>
+</html>

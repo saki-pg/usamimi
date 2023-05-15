@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="bg-light p-5 rounded my-4">
+    <h2 class="col-12 ms-2">質問の修正</h2>
+  </div>
+
+    <%= render 'form', question: @question %>
+</div>
+
+<%= link_to '質問一覧に戻る', questions_path, class: link_success %>

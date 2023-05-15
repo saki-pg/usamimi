@@ -1,0 +1,43 @@
+ja:
+  errors:
+    format: ! '%{attribute} %{message}'
+    messages:
+      prohibited_this_object_from_being_saved: "件のエラーが発生したため %{model} は保存されませんでした:"
+      error:
+        one: "エラーが 1 件あります:"
+        other: "エラーが %{count} 件あります:"
+      blank: "を入力してください"
+      taken: "は既に使用されています"
+      too_short: "は%{count}文字以上で入力してください"
+      too_long: "は%{count}文字以内で入力してください"
+      invalid: "が無効です"
+  activerecord:
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        name: "ユーザー名"
+      question:
+        title: "タイトル"
+        body: "内容"
+      answer:
+        body: "内容"
+    models:
+      question: "質問"
+      answer: "回答"
+
+
+# ja:
+#   errors:
+#     messages:
+#       blank: "を入力してください"
+#       taken: "は既に使用されています"
+#       too_short: "は%{count}文字以上で入力してください"
+#       too_long: "は%{count}文字以内で入力してください"
+#       invalid: "が無効です"
+#   activerecord:
+#     attributes:
+#       user:
+#         email: "メールアドレス"
+#         password: "パスワード"
+#         name: "ユーザー名"

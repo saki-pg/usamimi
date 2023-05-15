@@ -1,0 +1,32 @@
+
+<div class="container justify-content-center">
+  <div class="bg-light p-5" style="width: 100%; height: 600px; background-image: url('assets/main.jpeg'); background-size: cover;">
+  </div>
+
+  <div class="my-5 text-center">
+    <h2>うさぎがいる生活</h2>
+    <% if user_signed_in? %>
+      <a href="<%= new_question_path %>" class="btn btn-success btn-lg">質問する</a>
+    <% else %>
+      <a href="<%= new_user_session_path %>" class="btn btn-success btn-lg">ログインして質問する</a>
+    <% end %>
+
+  </div>
+
+  <div class="row text-center">
+    <% @questions.each do |question| %>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <%=image_tag "rabbit_2.png",class:"card-img-top" %>
+          <div class="card-body">
+            <h4 class="card-title"><%= question.title %></h4>
+            <p class="card-text"><%= question.body %></p>
+          </div>
+          <div class="card-footer">
+            <a href="<%= question_path(question) %>" class="btn btn-success">もっと見る</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

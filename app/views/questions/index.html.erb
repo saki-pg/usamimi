@@ -1,0 +1,29 @@
+<div class="container justify-content-center p-3">
+  <div class="bg-light p-5 rounded my-4">
+    <h2 class="col-12 ms-2">質問投稿一覧</h2>
+  </div>
+
+  <div class="row text-center">
+  <% if @questions.empty? %>
+    <div class="p-5">
+      <h5>まだ質問がありません。質問してみましょう！</h5>
+      <%= link_to '質問する！', new_question_path, class: 'btn btn-success' %>
+    </div>
+  <% else %>
+    <% @questions.each do |question| %>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <%=image_tag "rabbit_2.png",class:"card-img-top" %>
+          <div class="card-body">
+            <h4 class="card-title"><%= question.title %></h4>
+            <p class="card-text"><%= question.body %></p>
+          </div>
+          <div class="card-footer">
+            <%= link_to '詳細', question %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="row justify-content-center p-3">
+  <div class="col-10 user-account">
+    <% unless current_user.email == 'guest_user@example.com' %>
+
+      <div class="bg-light p-5 rounded my-4">
+        <h2 class="col-12 ms-2">マイページ</h2>
+      </div>
+
+      <div class="user-account-box p-3">
+        <h4 class="mb-3 mr-5 ml-5 row">プロフィール</h4>
+        <%= form_with(model: current_user, url: account_dashboards_path, local: true, method: :put, multipart: true) do |form| %>
+          <div class="mb-3 row">
+            <%= form.label :name, '名前' %>
+            <%= form.text_field :name, value: current_user.name, class: 'form-control', name: 'user[name]' %>
+          </div>
+
+          <div class="mb-5 row">
+            <%= form.label :image, 'プロフィール画像' %>
+            <%= form.file_field :image, class: 'form-control', name: 'user[image]' %>
+          </div>
+
+          <%= form.submit '更新', class: 'btn btn-success text-white btn-outline-success text-white bg-success rounded col-1' %>
+        <% end %>
+      </div>
+
+
+      <div class="user-account-box p-3">
+        <h4 class="mt-4 mb-3 row">アカウント情報</h4>
+
+        <div class="my-5 row">
+          <label for="staticEmail" class="col-sm-3 col-form-label">メールアドレス</label>
+          <div class="col-9">
+            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="<%= current_user.email %>">
+          </div>
+        </div>
+
+        <div class="mt-5 mb-5 mr-5 row">
+          <label for="inputPassword" class="col-sm-3 col-form-label">パスワード</label>
+          <div class="col-9">********</div>
+        </div>
+        <%=link_to "編集する","/users/edit",class:"btn btn-success text-white btn-outline-success text-white bg-success rounded col-1"%>
+      </div>
+    <% else %>
+      <div class="p-5">
+        <h4>ゲストユーザーのため、変更することはできません。</h4>
+      </div>
+    <% end %>
+  </div>
+</div>
