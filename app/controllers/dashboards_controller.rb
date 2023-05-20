@@ -17,15 +17,17 @@ class DashboardsController < ApplicationController
     end
   end
 
-  # def update
-  #   @user= current_user
-  #   @dashboard = current_user.dashboard
-  #   if @dashboard.update(dashboard_params)
-  #     redirect_to account_dashboards_path, notice: 'アカウント情報を更新しました'
-  #   else
-  #     render :account
-  #   end
-  # end
+
+  def unsubscribe
+  end
+
+  def withdrawal
+    @user = User.find(params[:id])
+    @user.update(is_deleted: true)
+    reset_session
+    flash[:notice] = '退会処理を実行いたしました'
+    redirect_to root_path
+  end
 
   def user_params
     params.require(:user).permit(:name, :introduction, :image)
