@@ -1,27 +1,27 @@
 version: 2.1
-orbs:
-  heroku: circleci/heroku@1.1.1
-  ruby: circleci/ruby@1.1.2
-
 jobs:
   build:
     docker:
-      - image: circleci/ruby:3.1
+      - image: circleci/ruby:3.0
     steps:
       - checkout
-      - ruby/install-deps
       - run:
-          name: Run Rubocop
+          name: Run RuboCop
           command: bundle exec rubocop
       - run:
           name: Run RSpec
           command: bundle exec rspec
-      - heroku/install
-      - heroku/deploy-via-git:
-          app-name: your-heroku-app-name
 
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
+  deploy:
+    docker:
+      - image: circleci/ruby:3.0
+    steps:
+      - checkout
+      - run:
+          name: Deploy to Heroku
+          command: |
+            echo "machine https://api.heroku.com" >> ~/.netrc
+            echo "  login <HEROKU_API_KEY>" >> ~/.netrc
+            echo "  password" >> ~/.netrc
+            heroku git:remote --app 'usamimi'
+            git push heroku master
