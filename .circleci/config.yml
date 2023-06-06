@@ -21,7 +21,7 @@ jobs:
           name: Deploy to Heroku
           command: |
             echo "machine https://api.heroku.com" >> ~/.netrc
-            echo "  login <HEROKU_API_KEY>" >> ~/.netrc
+            echo "  login $HEROKU_API_KEY" >> ~/.netrc
             echo "  password" >> ~/.netrc
             heroku git:remote --app 'usamimi'
             git push heroku master
