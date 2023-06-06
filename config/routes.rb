@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :dashboard do
-    get 'users/withdrawal'
-  end
   root to: 'homes#top'
 
   devise_for :users, controllers: {
@@ -14,23 +11,18 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
 
-  get '/account', to: 'dashboards#account'
-  post '/account', to: 'dashboards#update'
-  get 'update', to: 'dashboards#update'
+  get 'account', to: 'dashboards#account'
+  patch 'account', to: 'dashboards#update'
 
   get 'questions' => 'questions#index'
   get 'questions/search', to: 'questions#search'
   get 'answers' => 'answers#index'
 
   # 退会確認画面
-  get '/users/:id/unsubscribe' => 'dashboards/users#unsubscribe', as: 'unsubscribe'
+  get '/unsubscribe', to: 'dashboards#unsubscribe', as: 'unsubscribe'
 
   # 論理削除用のルーティング
-  patch '/users/:id/withdrawal' => 'dashboards/users#withdrawal', as: 'withdrawal'
-
-  resources :dashboards, only: %i[index update] do
-    get :account, on: :collection
-  end
+  patch '/withdrawal', to: 'dashboards#withdrawal', as: 'withdrawal'
 
   resources :questions, shallow: true do
     resources :answers, shallow: true do

@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+# ユーザーの返信を処理するクラス
 class ReactionsController < ApplicationController
   before_action :set_reaction, only: %i[show edit update destroy]
+  before_action :find_answer, only: %i[new create]
 
   # GET /reactions or /reactions.json
   def index
@@ -13,7 +15,6 @@ class ReactionsController < ApplicationController
 
   # GET /reactions/new
   def new
-    @answer = Answer.find(params[:answer_id])
     @reaction = @answer.reactions.build(user_id: current_user.id)
   end
 
@@ -22,15 +23,14 @@ class ReactionsController < ApplicationController
 
   # POST /reactions or /reactions.json
   def create
-    @answer = Answer.find(params[:answer_id])
-    @reaction = @answer.reactions.build(reaction_params)
+    @reaction = @answer.reactions.build(reaction_params.merge(user_id: current_user.id))
 
     respond_to do |format|
       if @reaction.save
-        format.html { redirect_to @answer.question, notice: '返信を投稿しました。' }
+        format.html { redirect_to @answer.question, notice: t('reaction.create.success') }
         format.json { render :show, status: :created, location: @reaction }
       else
-        flash[:error] = '返信を投稿できませんでした。入力内容を確認してください。'
+        flash[:error] = t('reaction.create.fail')
         format.html { render :new }
         format.json { render json: @reaction.errors, status: :unprocessable_entity }
       end
@@ -41,10 +41,10 @@ class ReactionsController < ApplicationController
   def update
     respond_to do |format|
       if @reaction.update(reaction_params)
-        format.html { redirect_to reaction_url(@reaction), notice: '返信を更新しました。' }
+        format.html { redirect_to reaction_url(@reaction), notice: t('reaction.update.success') }
         format.json { render :show, status: :ok, location: @reaction }
       else
-        flash[:error] = '返信を更新できませんでした。入力内容を確認してください。'
+        flash[:error] = t('reaction.update.fail')
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @reaction.errors, status: :unprocessable_entity }
       end
@@ -56,7 +56,7 @@ class ReactionsController < ApplicationController
     @reaction.destroy
 
     respond_to do |format|
-      format.html { redirect_to reactions_url, notice: '返信を削除しました。' }
+      format.html { redirect_to reactions_url, notice: t('reaction.delete.success') }
       format.json { head :no_content }
     end
   end
@@ -68,8 +68,12 @@ class ReactionsController < ApplicationController
     @reaction = Reaction.find(params[:id])
   end
 
+  def find_answer
+    @answer = Answer.find(params[:answer_id])
+  end
+
   # Only allow a list of trusted parameters through.
   def reaction_params
-    params.require(:reaction).permit(:user_id, :answer_id, :body)
+    params.require(:reaction).permit(:answer_id, :body)
   end
 end

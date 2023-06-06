@@ -1,12 +1,12 @@
 <h1>Editing Reaction</h1>
 
-<%= form_with(model: reaction) do |form| %>
-  <% if reaction.errors.any? %>
+<%= form_with(model: @reaction) do |form| %>
+  <% if @reaction.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(reaction.errors.count, "error") %> prohibited this reaction from being saved:</h2>
+      <h2><%= pluralize(@reaction.errors.count, "error") %> prohibited this reaction from being saved:</h2>
 
       <ul>
-        <% reaction.errors.each do |error| %>
+        <% @reaction.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -33,6 +33,6 @@
   </div>
 <% end %>
 
-
 <%= link_to 'Show', @reaction %> |
-<%= link_to 'Back', reactions_path %>
+<%= link_to 'Back', answer_reactions_path(@reaction.answer) %>
+

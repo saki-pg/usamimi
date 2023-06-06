@@ -1,106 +1,94 @@
 # frozen_string_literal: true
 
+# 質問の作成、読み取り、更新、削除、検索
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[search]
   before_action :set_question, only: %i[show edit update destroy]
   before_action :set_best_answer, only: %i[update]
 
-  # GET /questions or /questions.json
+  # 質問一覧表示
   def index
     @questions = current_user.questions.all
   end
 
-  # GET /questions/1 or /questions/1.json
+  # 質問詳細表示
   def show; end
 
-  # GET /questions/new
+  # 新規質問作成
   def new
     @question = Question.new
   end
 
-  # GET /questions/1/edit
+  # 質問編集
   def edit; end
 
-  # POST /questions or /questions.json
+  # 質問投稿
   def create
     @question = current_user.questions.build(question_params)
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: '質問を投稿しました。' }
+        format.html { redirect_to @question, notice: t('.success') }
         format.json { render :show, status: :created, location: @question }
       else
-        flash[:error] = '質問を投稿できませんでした。入力内容を確認してください。'
+        flash[:error] = t('.error')
         format.html { render :new }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /questions/1 or /questions/1.json
+  # 質問更新
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to question_url(@question), notice: '質問を更新しました。' }
+        format.html { redirect_to question_url(@question), notice: t('.success') }
         format.json { render :show, status: :ok, location: @question }
       else
-        flash[:error] = '質問を更新できませんでした。入力内容を確認してください。'
+        flash[:error] = t('.error')
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /questions/1 or /questions/1.json
+  # 質問削除
   def destroy
     @question.destroy
 
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: '質問を削除しました。' }
+      format.html { redirect_to questions_url, notice: t('questions.delete.success') }
       format.json { head :no_content }
     end
   end
 
-  # def search
-  #   if params[:keyword].present?
-  #     @questions = Question.where("title LIKE ? OR body LIKE ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-  #   else
-  #     @questions = Question.all
-  #   end
-  #   @cnt = @questions.count
-  # end
-
+  # 検索機能
   def search
-    if params[:keyword].nil?
+    if params[:keyword].blank?
       @question = Question.all
       @cnt = Question.all.count
-    elsif params[:keyword] == ''
-      @question = Question.all
-      @cnt = Question.all.count
-    elsif  params[:keyword]
+    else
       @question = Question.where('title LIKE?',
-                                 "%#{params[:keyword]}%").or(Question.where('body LIKE?',
-                                                                            "%#{params[:keyword]}%"))
-      @cnt = Question.where('title LIKE?',
-                            "%#{params[:keyword]}%").or(Question.where('body LIKE?',
-                                                                       "%#{params[:keyword]}%")).count
+                                 "%#{params[:keyword]}%").or(Question.where('body LIKE?', "%#{params[:keyword]}%"))
+      @cnt = @question.count
     end
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # 共通の設定や制約を共有するためのコールバック
   def set_question
     @question = Question.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
+  # 信頼できるパラメータのみ許可する
   def question_params
     params.require(:question).permit(:user_id, :title, :body, :best_answer_id)
   end
 
+  # ベストアンサーのセット
   def set_best_answer
     return if @question.best_answer_id.blank?
 
-    redirect_to @question, alert: 'ベストアンサーが選択された後は編集できません。'
+    redirect_to @question, alert: t('questions.update.best_answer_chosen')
   end
 end
