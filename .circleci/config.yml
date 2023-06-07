@@ -22,4 +22,4 @@ workflows:
             branches:
               only: master
           context: heroku
-          appname: usamimi
+          app-name: usamimi
