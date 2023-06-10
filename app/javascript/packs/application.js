@@ -8,7 +8,6 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
-// ここから
 import 'bootstrap';
 import '../stylesheets/application';
 import '@fortawesome/fontawesome-free/js/all';
