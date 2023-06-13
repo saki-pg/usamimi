@@ -37,7 +37,7 @@ module Users
 
     # ユーザーがゲストかどうかを確認するメソッド
     def guest_user?
-      resource.email == 'guest_user@example.com'
+      resource&.email == 'guest_user@example.com'
     end
 
     # ゲストユーザーの操作に対する処理を行うメソッド

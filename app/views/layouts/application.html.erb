@@ -24,10 +24,10 @@
           <div class="header-search-container mt-3">
             <div class="header-search-box">
               <%= form_with url: questions_search_path,method: :get,local: true do |f| %>
+                <i class="fas fa-search "></i>
                 <%= f.text_field :keyword ,placeholder:"キーワード検索",class:"header-search-input"%>
                 <% submit_tag %>
               <% end %>
-              <i class="fas fa-search "></i>
             </div>
           </div>
         </div>

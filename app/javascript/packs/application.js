@@ -8,6 +8,9 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
-import 'bootstrap';
-import '../stylesheets/application';
-import '@fortawesome/fontawesome-free/js/all';
+// Import Bootstrap JavaScript and styles
+import 'bootstrap/dist/js/bootstrap'
+import 'bootstrap/dist/css/bootstrap'
+
+// Import Font Awesome styles
+import '@fortawesome/fontawesome-free/css/all.css'

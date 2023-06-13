@@ -6,7 +6,7 @@ ja:
       signed_up_but_inactive: "アカウントが有効化されていません。"
       signed_up_but_locked: "アカウントがロックされています。"
       signed_up_but_unapproved: "アカウントの承認が必要です。"
-    sessions:
+  sessions:
       guest_user_sign_in: "ゲストユーザーとしてログインしました。"
       reject_user:
         deactivated_account: "退会済みです。再度ご登録をしてご利用ください。"

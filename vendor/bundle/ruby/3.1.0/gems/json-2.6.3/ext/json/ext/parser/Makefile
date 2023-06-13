@@ -13,12 +13,12 @@ NULLCMD = :
 #### Start of system configuration section. ####
 
 srcdir = .
-topdir = /Users/ishikawa/.rbenv/versions/3.1.3/include/ruby-3.1.0
+topdir = /Users/ishikawa/.rbenv/versions/3.1.4/include/ruby-3.1.0
 hdrdir = $(topdir)
-arch_hdrdir = /Users/ishikawa/.rbenv/versions/3.1.3/include/ruby-3.1.0/x86_64-darwin22
+arch_hdrdir = /Users/ishikawa/.rbenv/versions/3.1.4/include/ruby-3.1.0/x86_64-darwin22
 PATH_SEPARATOR = :
 VPATH = $(srcdir):$(arch_hdrdir)/ruby:$(hdrdir)/ruby
-prefix = $(DESTDIR)/Users/ishikawa/.rbenv/versions/3.1.3
+prefix = $(DESTDIR)/Users/ishikawa/.rbenv/versions/3.1.4
 rubysitearchprefix = $(rubylibprefix)/$(sitearch)
 rubyarchprefix = $(rubylibprefix)/$(arch)
 rubylibprefix = $(libdir)/$(RUBY_BASE_NAME)
@@ -88,10 +88,10 @@ CCDLFLAGS = -fno-common
 CFLAGS   = $(CCDLFLAGS) $(cflags)  -fno-common -pipe -DSTR_UMINUS_DEDUPE=1  -DSTR_UMINUS_DEDUPE_FROZEN=1  $(ARCH_FLAG)
 INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir)
 DEFS     = 
-CPPFLAGS = -DHAVE_RB_ENC_RAISE -DHAVE_RB_ENC_INTERNED_STR -I/Users/ishikawa/.rbenv/versions/3.1.3/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags)
+CPPFLAGS = -DHAVE_RB_ENC_RAISE -DHAVE_RB_ENC_INTERNED_STR -I/Users/ishikawa/.rbenv/versions/3.1.4/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags)
 CXXFLAGS = $(CCDLFLAGS) -fdeclspec $(ARCH_FLAG)
-ldflags  = -L. -L/Users/ishikawa/.rbenv/versions/3.1.3/lib  -fstack-protector-strong -L/usr/local/lib
-dldflags = -L/Users/ishikawa/.rbenv/versions/3.1.3/lib  -Wl,-multiply_defined,suppress $(LIBRUBYARG_SHARED)
+ldflags  = -L. -L/Users/ishikawa/.rbenv/versions/3.1.4/lib  -fstack-protector-strong -L/usr/local/lib
+dldflags = -L/Users/ishikawa/.rbenv/versions/3.1.4/lib  -Wl,-multiply_defined,suppress -Wl,-undefined,dynamic_lookup $(LIBRUBYARG_SHARED)
 ARCH_FLAG = 
 DLDFLAGS = $(ldflags) $(dldflags) $(ARCH_FLAG)
 LDSHARED = $(CC) -dynamic -bundle

@@ -1,5 +1,5 @@
 current directory: /Users/ishikawa/usamimi/vendor/bundle/ruby/3.1.0/gems/nio4r-2.5.9/ext/nio4r
-/Users/ishikawa/.rbenv/versions/3.1.3/bin/ruby -I /Users/ishikawa/.rbenv/versions/3.1.3/lib/ruby/3.1.0 extconf.rb
+/Users/ishikawa/.rbenv/versions/3.1.4/bin/ruby -I /Users/ishikawa/.rbenv/versions/3.1.4/lib/ruby/3.1.0 extconf.rb
 checking for unistd.h... yes
 checking for linux/aio_abi.h... no
 checking for linux/io_uring.h... no
@@ -13,10 +13,10 @@ checking for sys/resource.h... yes
 creating Makefile
 
 current directory: /Users/ishikawa/usamimi/vendor/bundle/ruby/3.1.0/gems/nio4r-2.5.9/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20230607-12564-j2z06f sitelibdir\=./.gem.20230607-12564-j2z06f clean
+make DESTDIR\= sitearchdir\=./.gem.20230610-72796-i8d8xw sitelibdir\=./.gem.20230610-72796-i8d8xw clean
 
 current directory: /Users/ishikawa/usamimi/vendor/bundle/ruby/3.1.0/gems/nio4r-2.5.9/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20230607-12564-j2z06f sitelibdir\=./.gem.20230607-12564-j2z06f
+make DESTDIR\= sitearchdir\=./.gem.20230610-72796-i8d8xw sitelibdir\=./.gem.20230610-72796-i8d8xw
 compiling bytebuffer.c
 bytebuffer.c:308:20: warning: implicit conversion loses integer precision: 'ssize_t' (aka 'long') to 'int' [-Wshorten-64-to-32]
     return INT2NUM(bytes_read);
@@ -288,5 +288,5 @@ compiling selector.c
 linking shared-object nio4r_ext.bundle
 
 current directory: /Users/ishikawa/usamimi/vendor/bundle/ruby/3.1.0/gems/nio4r-2.5.9/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20230607-12564-j2z06f sitelibdir\=./.gem.20230607-12564-j2z06f install
-/usr/bin/install -c -m 0755 nio4r_ext.bundle ./.gem.20230607-12564-j2z06f
+make DESTDIR\= sitearchdir\=./.gem.20230610-72796-i8d8xw sitelibdir\=./.gem.20230610-72796-i8d8xw install
+/usr/bin/install -c -m 0755 nio4r_ext.bundle ./.gem.20230610-72796-i8d8xw

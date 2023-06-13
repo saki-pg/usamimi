@@ -115,6 +115,10 @@ ja:
         sign_in: ログイン
       signed_in: ログインしました。
       signed_out: ログアウトしました。
+      guest_user_sign_in: "ゲストユーザーとしてログインしました。"
+      reject_user:
+        deactivated_account: "退会済みです。再度ご登録をしてご利用ください。"
+        incorrect_input: "項目を入力してください"
     shared:
       links:
         back: 戻る
