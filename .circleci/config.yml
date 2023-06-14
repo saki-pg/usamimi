@@ -18,7 +18,7 @@ jobs:
           command: |
             set -x
             docker-compose up -d
-            docker exec usamimi_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+            docker exec usamimi curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
       - run:
           name: Setup database
           command: |
