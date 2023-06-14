@@ -20,7 +20,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.ci
-    container_name: usamimiec_app
+    container_name: usamimi
     ports:
       - '3000:3000'
     environment:
