@@ -25,7 +25,7 @@ jobs:
             docker-compose exec usamimi bash -c 'yes n | bundle exec rails g spree:install --migrate --seed --sample --auto_accept'
       - run:
           name: Run rspec
-          command: docker-compose exec usamimi rspec
+          command: docker-compose exec usamimiec rspec
 
   rubocop:
     working_directory: ~/usamimi
