@@ -20,6 +20,20 @@ jobs:
             docker-compose up -d
             docker exec usamimi curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
       - run:
+          name: Install Chrome
+          command: |
+            curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo dpkg -i google-chrome.deb
+            sudo sed -i 's|HERE/chrome"|HERE/chrome" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
+            rm google-chrome.deb
+      - run:
+          name: Install ChromeDriver
+          command: |
+            CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`
+            mkdir -p ~/chromedriver && curl -sS -o ~/chromedriver/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip && unzip ~/chromedriver/chromedriver_linux64.zip -d ~/chromedriver
+            sudo mv -f ~/chromedriver/chromedriver /usr/local/bin/chromedriver
+            sudo chmod +x /usr/local/bin/chromedriver
+      - run:
           name: Run rspec
           command: docker-compose exec usamimiec rspec
 
@@ -63,19 +77,3 @@ jobs:
           name: Run post-deploy tasks
           command: |
             heroku config:set AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -a usamimi
-            heroku run bin/rails db:migrate -a usamimi
-
-
-orbs:
-  build-tools: circleci/build-tools@2.6.3
-  jq: circleci/jq@1.9.1
-workflows:
-  version: 2.1
-  build:
-    jobs:
-      - rspec
-      - rubocop
-      - heroku_deploy:
-          requires:
-            - rspec
-            - rubocop
