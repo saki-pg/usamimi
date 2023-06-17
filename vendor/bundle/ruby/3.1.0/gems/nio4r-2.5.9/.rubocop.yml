@@ -1,6 +1,7 @@
 AllCops:
   TargetRubyVersion: 2.4
   DisplayCopNames: true
+  SuggestExtensions: false
 
 Layout/HashAlignment:
   Enabled: false
@@ -98,3 +99,4 @@ Style/StringLiterals:
 
 Style/TrivialAccessors:
   Enabled: false
+
