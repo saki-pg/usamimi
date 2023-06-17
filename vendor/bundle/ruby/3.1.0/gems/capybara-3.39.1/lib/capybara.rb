@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'timeout'
-require 'nokogiri'
-require 'xpath'
-require 'forwardable'
 require 'capybara/config'
 require 'capybara/registration_container'
 

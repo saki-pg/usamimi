@@ -14,11 +14,11 @@ jobs:
           command: |
             echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
       - run:
-          name: Start containers and verify it is working
+          name: Start containers and verify they are working
           command: |
             set -x
             docker-compose up -d
-            docker exec usamimi curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+            docker exec usamimiec curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
       - run:
           name: Install Chrome
           command: |
@@ -30,10 +30,15 @@ jobs:
       - run:
           name: Install ChromeDriver
           command: |
-            CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`
-            mkdir -p ~/chromedriver && curl -sS -o ~/chromedriver/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip && unzip ~/chromedriver/chromedriver_linux64.zip -d ~/chromedriver
+            CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
+            mkdir -p ~/chromedriver
+            curl -sS -o ~/chromedriver/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
+            unzip ~/chromedriver/chromedriver_linux64.zip -d ~/chromedriver
             sudo mv -f ~/chromedriver/chromedriver /usr/local/bin/chromedriver
             sudo chmod +x /usr/local/bin/chromedriver
+      - run:
+          name: Build JavaScript packs
+          command: docker-compose exec usamimiec bundle exec rails webpacker:compile
       - run:
           name: Run rspec
           command: docker-compose exec usamimiec rspec
@@ -50,10 +55,9 @@ jobs:
             - gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - gemfiles-{{ .Branch }}-
             - gemfiles-master-
-      - run: bundle config --local path vendor/bundle
       - run:
-          name: bundle install
-          command: bundle check || bundle install --jobs=8 --clean
+          name: Bundle install
+          command: bundle config --local path vendor/bundle && bundle check || bundle install --jobs=8 --clean
       - run:
           name: Run rubocop
           command: bundle exec rubocop --parallel
@@ -79,7 +83,6 @@ jobs:
           command: |
             heroku config:set AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -a usamimi
             heroku run bin/rails db:migrate -a usamimi
-
 
 orbs:
   build-tools: circleci/build-tools@2.6.3

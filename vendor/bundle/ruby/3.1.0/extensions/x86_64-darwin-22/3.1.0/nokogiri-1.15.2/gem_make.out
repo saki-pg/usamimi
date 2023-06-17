@@ -1,0 +1,68 @@
+current directory: /Users/ishikawa/usamimi/vendor/bundle/ruby/3.1.0/gems/nokogiri-1.15.2/ext/nokogiri
+/Users/ishikawa/.rbenv/versions/3.1.4/bin/ruby -I /Users/ishikawa/.rbenv/versions/3.1.4/lib/ruby/3.1.0 extconf.rb
+checking for whether -std=c99 is accepted as CFLAGS... yes
+checking for whether -Wno-declaration-after-statement is accepted as CFLAGS... yes
+checking for whether -O2 is accepted as CFLAGS... yes
+checking for whether -g is accepted as CFLAGS... yes
+checking for whether -Winline is accepted as CFLAGS... yes
+checking for whether -Wmissing-noreturn is accepted as CFLAGS... yes
+checking for whether -Wshorten-64-to-32 is accepted as CFLAGS... yes
+checking for whether -Wno-error=unused-command-line-argument-hard-error-in-future is accepted as CFLAGS... no
+checking for whether -Wno-unknown-warning-option is accepted as CFLAGS... yes
+Building nokogiri using packaged libraries.
+Static linking is enabled.
+Cross build is disabled.
+checking for iconv.h... yes
+*** extconf.rb failed ***
+Could not create Makefile due to some reason, probably lack of necessary
+libraries and/or headers.  Check the mkmf.log file for more details.  You may
+need configuration options.
+
+Provided configuration options:
+	--with-opt-dir
+	--without-opt-dir
+	--with-opt-include
+	--without-opt-include=${opt-dir}/include
+	--with-opt-lib
+	--without-opt-lib=${opt-dir}/lib
+	--with-make-prog
+	--without-make-prog
+	--srcdir=.
+	--curdir
+	--ruby=/Users/ishikawa/.rbenv/versions/3.1.4/bin/$(RUBY_BASE_NAME)
+	--help
+	--clean
+	--prevent-strip
+	--enable-system-libraries
+	--disable-system-libraries
+	--use-system-libraries
+	--enable-system-libraries
+	--disable-system-libraries
+	--use-system-libraries
+	--enable-static
+	--disable-static
+	--enable-cross-build
+	--disable-cross-build
+	--enable-cross-build
+	--disable-cross-build
+	--with-zlib-dir
+	--without-zlib-dir
+	--with-zlib-include
+	--without-zlib-include=${zlib-dir}/include
+	--with-zlib-lib
+	--without-zlib-lib=${zlib-dir}/lib
+	--with-iconv-dir
+	--without-iconv-dir
+	--with-iconv-include
+	--without-iconv-include=${iconv-dir}/include
+	--with-iconv-lib
+	--without-iconv-lib=${iconv-dir}/lib
+/Users/ishikawa/.rbenv/versions/3.1.4/lib/ruby/3.1.0/bundler/rubygems_integration.rb:280:in `block (2 levels) in replace_gem': mini_portile2 is not part of the bundle. Add it to your Gemfile. (Gem::LoadError)
+	from extconf.rb:430:in `process_recipe'
+	from extconf.rb:872:in `<main>'
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  /Users/ishikawa/usamimi/vendor/bundle/ruby/3.1.0/extensions/x86_64-darwin-22/3.1.0/nokogiri-1.15.2/mkmf.log
+
+extconf failed, exit code 1
