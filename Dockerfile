@@ -1,4 +1,4 @@
-# Dockerfile.dev
+# Dockerfile
 FROM ruby:3.1.4
 
 # 必要なパッケージのインストール
@@ -13,7 +13,7 @@ COPY Gemfile.lock /usamimi/Gemfile.lock
 
 # bundlerのインストールとbundle installの実行
 RUN gem install bundler
-RUN bundle install
+RUN bundle install --without development test
 
 # ホストの全てのファイルをコピー
 COPY . /usamimi
@@ -24,4 +24,4 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
 # デフォルトでRailsサーバーを起動
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-b", "0.0.0.0", "-e", "production"]
