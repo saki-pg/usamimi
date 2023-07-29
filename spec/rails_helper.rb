@@ -7,6 +7,9 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'capybara/rspec'
 require 'selenium-webdriver'
+require 'webdrivers'
+Webdrivers::Chromedriver.required_version = '114.0.5735.90'
+
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

@@ -14,7 +14,7 @@ RSpec.describe 'Questions', type: :system do
       fill_in 'タイトル', with: 'Question title', wait: 5
       fill_in '内容', with: 'Question body', wait: 5
       click_button '投稿'
-      
+
       expect(page).to have_content '質問を投稿しました'
       expect(page).to have_content 'Question title'
       expect(page).to have_content 'Question body'
