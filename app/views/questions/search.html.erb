@@ -7,11 +7,11 @@
             <div class="question-search-frame">
               <div class="card">
                 <div class="question-search-profile card-header">
-                  <% if question.user.image.present? %>
-                    <%= image_tag question.user.image.url, class: "rounded-circle", size: "45x45" %>
-                  <% else %>
-                    <%= image_tag "rabbit_logo.png", class: "rounded-circle", size: "45x45" %>
-                  <% end %>
+                <% if question.user&.image.present? %>
+                  <%= image_tag url_for(question.user.image), class: "rounded-circle", size: "45x45" %>
+                <% else %>
+                  <%= image_tag "rabbit_logo.png", class: "rounded-circle", size: "45x45" %>
+                <% end %>
                   <%= question.user.name %>
                 </div>
                 <div class="card-body">

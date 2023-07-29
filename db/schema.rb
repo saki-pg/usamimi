@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2023_04_29_151853) do
   create_table "answers", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "question_id", null: false
-    t.text "body"
+    t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 2023_04_29_151853) do
 
   create_table "questions", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "title"
-    t.string "body"
+    t.string "title", null: false
+    t.string "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "best_answer_id"
@@ -94,7 +94,6 @@ ActiveRecord::Schema.define(version: 2023_04_29_151853) do
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "role", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
