@@ -1,1 +1,0 @@
-["--host=x86_64-apple-darwin22.1.0", "--enable-static", "--disable-shared", "--enable-shared=no", "--enable-static=yes", "CC=clang", "CFLAGS=-fPIC -O2 -fvisibility=hidden", "--prefix=/Users/ishikawa/usamimi/vendor/bundle/ruby/3.1.0/gems/sqlite3-1.6.3/ports/x86_64-apple-darwin22.1.0/sqlite3/3.42.0"]
