@@ -1,4 +1,3 @@
-# Dockerfile
 FROM ruby:3.1.4
 
 # 必要なパッケージのインストール
@@ -22,6 +21,3 @@ COPY . /usamimi
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
-
-# デフォルトでRailsサーバーを起動
-CMD ["rails", "server", "-b", "0.0.0.0", "-e", "production"]
