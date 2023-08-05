@@ -23,6 +23,7 @@
 - Rubocop
 - SQLite3
 - PostgreSQL
+- AWS S3
 - Heroku
 - Docker/Docker-compose
 
