@@ -1,9 +1,8 @@
 <div class="container">
   <div class="bg-light p-5 rounded my-4">
-    <h2 class="col-12 ms-2">回答する</h2>
+    <h2 class="col-12 ms-2">質問</h2>
   </div>
 
-  <h5>質問情報</h5>
   <div class="my-3">
     <% if current_user.image.attached? %>
       <%= image_tag current_user.image, class: "rounded-circle", size: "60x60" %>
@@ -15,32 +14,38 @@
 
   <div>
     <div class="my-3">
-      タイトル：<%= @answer.question.title %><br>
-      内容：<%= @answer.question.body %><br>
+      タイトル：<%= @question.title %><br>
+      内容：<%= @question.body %><br>
     </div>
-    <%= form_with(model: @answer, url: question_answers_path, local: true) do |form| %>
-      <% if @answer.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
-          <ul>
-            <% @answer.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
+
+    <% if @question.best_answer_id.nil? %>
+      <% unless current_user.id == @question.user_id %>
+        <%= form_with(model: @answer, url: question_answers_path(@question), local: true) do |form| %>
+          <% if flash[:error].present? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
+              <ul>
+                <% @answer.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field mb-3 w-100 row ml-0 mr-0">
+            <%= form.label :body, '回答' %>
+            <%= form.text_area :body %>
+          </div>
+
+          <%= form.hidden_field :user_id, value: current_user.id %>
+
+          <div class="actions">
+            <%= form.submit '投稿', class: 'btn btn-success' %>
+          </div>
+        <% end %>
       <% end %>
-
-      <div class="field mb-3 w-100 row ml-0 mr-0">
-        <%= form.label :body, '回答' %>
-        <%= form.text_area :body %>
-      </div>
-
-      <!-- ここにもuser_idを入れておかないとparamsに入らない -->
-      <%= form.hidden_field :user_id, value: current_user.id %>
-
-      <div class="actions">
-        <%= form.submit '投稿', class: 'btn btn-success' %>
-      </div>
+    <% else %>
+      <h3 class="mt-5"><span class="p-2 border border-3 border-danger rounded-pill">解決済み</span></h3>
     <% end %>
   </div>
 
@@ -49,45 +54,39 @@
       <h3 class="col-12 ms-2">その他の回答</h3>
     </div>
 
-    <% @question.answers.each do |answer| %>
-      <div class="col-lg-11 col-md-11">
-        <div class="card h-100">
-          <div class="card-body  <%= "best-answer" if @question.best_answer_id == answer.id %>">
-            <div class="my-3">
-              <% if current_user.image.attached? %>
-                <%= image_tag current_user.image, class: "rounded-circle", size: "60x60" %>
-              <%else%>
-                <%= image_tag "rabbit_logo.png", class: "rounded-circle", size: "60x60" %>
-              <%end%>
-              <span class="<%= "user_color" if current_user.id == answer.user_id %>">
-                <%= @answer.user.name %>
-              </span>
-            </div>
-            <div class="my-3"><%= answer.body %></div>
+    <div class="mb-5">
+      <% @question.answers.each do |answer| %>
+        <div class="col-lg-11 col-md-11">
+          <div class="card h-100">
+            <div class="card-body  <%= "best-answer" if @question.best_answer_id == answer.id %>">
+              <div class="my-1">
+                <% if answer.user.image.attached? %>
+                  <%= image_tag answer.user.image, class: "rounded-circle", size: "60x60" %>
+                <%else%>
+                  <%= image_tag "rabbit_logo.png", class: "rounded-circle", size: "60x60" %>
+                <%end%>
+                <span class="<%= "user_color" if current_user.id == answer.user_id %>">
+                  <%= answer.user.name %>
+                </span>
+              </div>
+              <div class="my-3"><%= answer.body %></div>
 
-            <% answer.reactions.each do |reaction| %>
-              <div class="row">
-                <div class="col-lg-12 col-md-12">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <div><%= reaction.body %></div>
+              <% answer.reactions.each do |reaction| %>
+                <div class="row">
+                  <div class="col-lg-12 col-md-12">
+                    <div class="card h-100">
+                      <div class="card-body">
+                        <div><%= reaction.body %></div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <br>
-            <% end %>
+                <br>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
-
-
-
-
-
-
-
-

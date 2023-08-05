@@ -1,6 +1,53 @@
 ja:
+  devise:
+    registrations:
+      signed_up: "アカウント登録が完了しました。"
+      signed_up_but_unconfirmed: "メールアドレスの確認が必要です。メールを確認して、アカウントを有効化してください。"
+      signed_up_but_inactive: "アカウントが有効化されていません。"
+      signed_up_but_locked: "アカウントがロックされています。"
+      signed_up_but_unapproved: "アカウントの承認が必要です。"
+  sessions:
+      guest_user_sign_in: "ゲストユーザーとしてログインしました。"
+      reject_user:
+        deactivated_account: "退会済みです。再度ご登録をしてご利用ください。"
+        incorrect_input: "項目を入力してください"
+  dashboard:
+    update:
+      success: "ユーザープロフィールの情報を更新しました"
+    withdrawal:
+      success: "退会処理を実行いたしました"
+  questions:
+    create:
+      success: "質問を投稿しました。"
+      error: "質問を投稿できませんでした。入力内容を確認してください。"
+    update:
+      success: "質問を更新しました。"
+      error: "質問を更新できませんでした。入力内容を確認してください。"
+      best_answer_chosen: "ベストアンサーが選択された後は編集できません。"
+    delete:
+      success: "質問を削除しました。"
+  answer:
+    create:
+      success: "回答を投稿しました。"
+      error: "回答を投稿できませんでした。入力内容を確認してください。"
+    update:
+      success: "回答を更新しました。"
+      error: "回答を更新できませんでした。入力内容を確認してください。"
+    delete:
+      success: "回答を削除しました。"
+  reaction:
+    create:
+      success: "返信を投稿しました。"
+      fail: "返信を投稿できませんでした。入力内容を確認してください。"
+    update:
+      success: "返信を更新しました。"
+      fail: "返信を更新できませんでした。入力内容を確認してください。"
+    delete:
+      success: "返信を削除しました。"
   errors:
-    format: ! '%{attribute} %{message}'
+    guest_user_restriction: "ゲストユーザーの更新・削除・プロフィール画像・自己紹介の変更はできません。"
+    guest_user_withdrawal: "ゲストユーザーは退会できません。"
+    format: "%{attribute} %{message}"
     messages:
       prohibited_this_object_from_being_saved: "件のエラーが発生したため %{model} は保存されませんでした:"
       error:
@@ -25,19 +72,3 @@ ja:
     models:
       question: "質問"
       answer: "回答"
-
-
-# ja:
-#   errors:
-#     messages:
-#       blank: "を入力してください"
-#       taken: "は既に使用されています"
-#       too_short: "は%{count}文字以上で入力してください"
-#       too_long: "は%{count}文字以内で入力してください"
-#       invalid: "が無効です"
-#   activerecord:
-#     attributes:
-#       user:
-#         email: "メールアドレス"
-#         password: "パスワード"
-#         name: "ユーザー名"

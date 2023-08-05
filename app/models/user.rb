@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-
+  # ユーザーの認証情報管理と、ユーザーが関連付ける質問、ダッシュボード、画像などを管理
   def self.guest
     find_or_create_by!(email: 'guest_user@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -21,9 +19,8 @@ class User < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_one_attached :image
 
-  has_one :dashboard
+  has_one :dashboard, dependent: :destroy
   accepts_nested_attributes_for :dashboard
 
   validates :name, presence: true
-  validates :introduction, length: { maximum: 200 }, on: :update
 end
