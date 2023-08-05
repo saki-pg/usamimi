@@ -1,24 +1,42 @@
-# README
+# **README**
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![ロゴ画像](./RM_logo.jpg)
 
-Things you may want to cover:
+# **usamimi**
 
-* Ruby version
+![トップ画像](./RM_top.jpg)
 
-* System dependencies
+うさぎの質問サイトです。
+個人間で匿名で気軽に質問、回答ができます。
 
-* Configuration
+ # **URL**
+[Heroku](https://usamimi.herokuapp.com/)
 
-* Database creation
+# **使用技術**
+- Ruby 3.1.4
+- Ruby on Rails 6.1.7
+- Puma
+- Bootstrap
+- RSpec
+- Rubocop
+- SQLite3
+- PostgreSQL
+- Heroku
+- Docker/Docker-compose
 
-* Database initialization
 
-* How to run the test suite
+# **機能一般**
+- ユーザー登録、ログイン機能(Devise)
+- 質問機能
+- 回答機能
+- ベスト回答決定
+- ソート機能
+- コメント機能
+- 検索機能
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
+# **テスト**
+- RSpec
+    - 単体テスト(model)
+    - APIテスト(request)
+    - 統合テスト(system)
