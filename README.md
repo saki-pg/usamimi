@@ -9,8 +9,10 @@
 うさぎの質問サイトです。
 個人間で匿名で気軽に質問、回答ができます。
 
+
  # **URL**
 [Heroku](https://usamimi.herokuapp.com/)
+
 
 # **使用技術**
 - Ruby 3.1.4
@@ -21,6 +23,7 @@
 - Rubocop
 - SQLite3
 - PostgreSQL
+- AWS S3
 - Heroku
 - Docker/Docker-compose
 
