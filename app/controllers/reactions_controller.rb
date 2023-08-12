@@ -4,24 +4,25 @@
 class ReactionsController < ApplicationController
   before_action :set_reaction, only: %i[show edit update destroy]
   before_action :find_answer, only: %i[new create]
+  before_action :ensure_correct_user, only: %i[edit update destroy]
 
-  # GET /reactions or /reactions.json
+  # 全てのリアクションを表示する
   def index
     @reactions = Reaction.all
   end
 
-  # GET /reactions/1 or /reactions/1.json
+  # 特定のリアクションを表示する
   def show; end
 
-  # GET /reactions/new
+  # 新しいリアクションを作成するための画面
   def new
     @reaction = @answer.reactions.build(user_id: current_user.id)
   end
 
-  # GET /reactions/1/edit
+  # リアクションを編集するための画面
   def edit; end
 
-  # POST /reactions or /reactions.json
+  # 新しいリアクションを作成する
   def create
     @reaction = @answer.reactions.build(reaction_params.merge(user_id: current_user.id))
 
@@ -37,7 +38,7 @@ class ReactionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /reactions/1 or /reactions/1.json
+  # リアクションを更新する
   def update
     respond_to do |format|
       if @reaction.update(reaction_params)
@@ -51,7 +52,7 @@ class ReactionsController < ApplicationController
     end
   end
 
-  # DELETE /reactions/1 or /reactions/1.json
+  # リアクションを削除する
   def destroy
     @reaction.destroy
 
@@ -63,17 +64,23 @@ class ReactionsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # 共通のセットアップまたは制約を共有する
   def set_reaction
     @reaction = Reaction.find(params[:id])
   end
 
+  # 回答を見つける
   def find_answer
     @answer = Answer.find(params[:answer_id])
   end
 
-  # Only allow a list of trusted parameters through.
+  # 信頼できるパラメータのリストのみを通す
   def reaction_params
     params.require(:reaction).permit(:answer_id, :body)
+  end
+
+  # 正しいユーザーか確認する
+  def ensure_correct_user
+    redirect_to(root_path) unless @reaction.user_id == current_user.id
   end
 end

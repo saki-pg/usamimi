@@ -4,38 +4,39 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_answer, only: %i[show edit update destroy]
+  before_action :ensure_correct_user, only: %i[edit update destroy]
 
-  # GET /answers or /answers.json
+  # 回答一覧を表示する
   def index
     @order = params[:order]
     @questions = load_questions(@order)
   end
 
-  # GET /answers/1 or /answers/1.json
+  # 回答詳細を表示する
   def show; end
 
-  # GET /answers/new
+  # 新しい回答を作成するフォームを表示する
   def new
     load_question
     @answer = Answer.new(user_id: current_user.id, question_id: @question.id)
   end
 
-  # GET /answers/1/edit
+  # 回答の編集フォームを表示する
   def edit; end
 
-  # POST /answers or /answers.json
+  # 回答を作成する
   def create
     load_question
     @answer = @question.answers.build(answer_params.merge(user_id: current_user.id))
     save_or_render_answer(:new, t('answer.create.success'), t('answer.create.fail'))
   end
 
-  # PATCH/PUT /answers/1 or /answers/1.json
+  # 回答を更新する
   def update
     update_or_render_answer(t('answer.update.success'), t('answer.update.fail'))
   end
 
-  # DELETE /answers/1 or /answers/1.json
+  # 回答を削除する
   def destroy
     @answer.destroy
     respond_to do |format|
@@ -56,10 +57,12 @@ class AnswersController < ApplicationController
     params.require(:answer).permit(:question_id, :body)
   end
 
+  # 質問を読み込む
   def load_question
     @question = Question.find(params[:question_id])
   end
 
+  # 質問を順序付けて読み込む
   def load_questions(order)
     case order
     when 'recent'
@@ -71,6 +74,7 @@ class AnswersController < ApplicationController
     end
   end
 
+  # 回答を保存またはレンダリングする
   def save_or_render_answer(fail_action, success_msg, fail_msg)
     respond_to do |format|
       if @answer.save
@@ -84,6 +88,7 @@ class AnswersController < ApplicationController
     end
   end
 
+  # 回答を更新またはレンダリングする
   def update_or_render_answer(success_msg, fail_msg)
     respond_to do |format|
       if @answer.update(answer_params)
@@ -95,5 +100,10 @@ class AnswersController < ApplicationController
         format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # 正しいユーザーか確認する
+  def ensure_correct_user
+    redirect_to(root_path) unless @answer.user_id == current_user.id
   end
 end

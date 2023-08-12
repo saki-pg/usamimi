@@ -5,6 +5,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[search]
   before_action :set_question, only: %i[show edit update destroy]
   before_action :set_best_answer, only: %i[update]
+  before_action :ensure_correct_user, only: %i[edit update destroy]
 
   # 質問一覧表示
   def index
@@ -88,7 +89,12 @@ class QuestionsController < ApplicationController
   # ベストアンサーのセット
   def set_best_answer
     return if @question.best_answer_id.blank?
-
     redirect_to @question, alert: t('questions.update.best_answer_chosen')
+  end
+
+  # 正しいユーザーか確認する
+  def ensure_correct_user
+    @question = Question.find(params[:id])
+    redirect_to(questions_path) unless @question.user_id == current_user.id
   end
 end
