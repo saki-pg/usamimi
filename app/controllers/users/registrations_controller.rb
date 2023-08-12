@@ -59,7 +59,7 @@ module Users
     # リソースが正常に作成された場合の処理
     def handle_successful_resource_creation(resource)
       set_flash_for(resource)
-      
+
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
