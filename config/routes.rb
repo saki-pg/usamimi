@@ -30,3 +30,6 @@ Rails.application.routes.draw do
     end
   end
 end
+
+  # get '/users', to: 'users/registrations#new'
+# get 'user/:id',               to: 'user#show'

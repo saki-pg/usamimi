@@ -13,8 +13,7 @@ class User < ApplicationRecord
     super && !is_deleted
   end
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   has_many :questions, dependent: :destroy
   has_one_attached :image
@@ -23,4 +22,5 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :dashboard
 
   validates :name, presence: true
+  validates :email, presence: true
 end
