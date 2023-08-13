@@ -57,7 +57,7 @@ class ReactionsController < ApplicationController
     @reaction.destroy
 
     respond_to do |format|
-      format.html { redirect_to reactions_url, notice: t('reaction.delete.success') }
+      format.html { redirect_to @reaction.answer.question, notice: t('reaction.delete.success') }
       format.json { head :no_content }
     end
   end

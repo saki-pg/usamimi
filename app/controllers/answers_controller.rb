@@ -33,7 +33,12 @@ class AnswersController < ApplicationController
 
   # 回答を更新する
   def update
-    update_or_render_answer(t('answer.update.success'), t('answer.update.fail'))
+    if @answer.update(answer_params)
+      redirect_to @answer, notice: '更新に成功しました'
+    else
+      flash[:error] = '更新に失敗しました'
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   # 回答を削除する

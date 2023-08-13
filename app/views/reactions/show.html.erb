@@ -1,19 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div class="container p-5">
+  <p>
+    <strong>Body:</strong>
+    <%= @reaction.body %>
+  </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @reaction.user_id %>
-</p>
-
-<p>
-  <strong>Answer:</strong>
-  <%= @reaction.answer_id %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @reaction.body %>
-</p>
-
-<%= link_to 'Edit', edit_reaction_path(@reaction) %> |
-<%= link_to 'Back', reactions_path %>
+  <%= link_to '現在の質問に戻る', question_path(@reaction.answer.question), class: "link-success" %><br>
+  <%= link_to '質問投稿一覧', questions_path, class: "link-success" %>
+</div>

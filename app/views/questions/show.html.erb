@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="bg-light p-5 rounded my-4">
-    <h2 class="card-title"><%= @question.title %></h2>
+    <h2 class="card-title">質問</h2>
   </div>
   <div class="card-body my-5">
     <div class="d-flex justify-content-between">
@@ -17,7 +17,8 @@
             <%= @question.user.name %>
           </span><br>
         </div>
-        内容：<br><%= @question.body %><br>
+        タイトル：<%= @question.title %><br>
+        内容：<%= @question.body %><br>
       </div>
       
       <div>
@@ -72,6 +73,37 @@
                   <div class="card h-100">
                     <div class="card-body">
                       <div><%= reaction.body %></div>
+
+
+                      <% if current_user.id == reaction.user_id %>
+                        <div style="text-align: right;">
+                          <%= link_to "編集", edit_reaction_path(reaction), class: "btn btn-light" %>
+                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-<%= reaction.id %>">
+                            削除
+                          </button>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="deleteModal-<%= reaction.id %>" tabindex="-1" aria-labelledby="deleteModalLabel-<%= reaction.id %>" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel-<%= reaction.id %>">削除の確認</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                              </div>
+                              <div class="modal-body">
+                                この返信を削除してよろしいですか？
+                              </div>
+                              <div class="modal-footer">
+                                <%= link_to "削除", reaction_path(reaction), method: :delete, class: "btn btn-danger" %>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <% end %>
+
+
                     </div>
                   </div>
                 </div>

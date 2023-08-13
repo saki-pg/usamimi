@@ -9,7 +9,9 @@
     <%else%>
       <%= image_tag "rabbit_logo.png", class: "rounded-circle", size: "60x60" %>
     <%end%>
-    <%= @question.user.name %>
+    <span class="<%= "user_color" if current_user.id == @question.user_id %>">
+      <%= @question.user.name %>
+    </span>
   </div>
 
   <div>

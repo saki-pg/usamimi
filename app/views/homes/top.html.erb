@@ -6,9 +6,9 @@
   <div class="my-5 text-center">
     <h2>うさぎがいる生活</h2>
     <% if user_signed_in? %>
-      <a href="<%= new_question_path %>" class="btn btn-success btn-lg">質問する</a>
+      <%= link_to "質問する", new_question_path, class: "btn btn-success btn-lg" %>
     <% else %>
-      <a href="<%= new_user_session_path %>" class="btn btn-success btn-lg">ログインして質問する</a>
+      <%= link_to "ログインして質問する", new_user_session_path, class: "btn btn-success btn-lg" %>
     <% end %>
   </div>
 
@@ -22,7 +22,7 @@
             <p class="card-text"><%= question.body %></p>
           </div>
           <div class="card-footer">
-            <a href="<%= new_question_answer_path(question) %>" class="btn btn-success">もっと見る</a>
+            <%= link_to 'もっと見る', new_question_answer_path(question.id), class: 'btn btn-success' %>
           </div>
         </div>
       </div>

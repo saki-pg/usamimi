@@ -3,6 +3,11 @@
     <h2 class="col-12 ms-2">質問の編集</h2>
   </div>
   <%= render 'form', question: @question %>
+
+  <div>
+    <%= link_to '現在の質問に戻る', question_path(@question), class: "link-success" %><br>
+    <%= link_to '質問投稿一覧に戻る', questions_path, class: "link-success" %>
+  </div>
 </div>
 
-<%= link_to '質問一覧に戻る', questions_path, class: "link-success" %>
+

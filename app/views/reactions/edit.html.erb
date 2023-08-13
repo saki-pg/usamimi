@@ -1,38 +1,29 @@
-<h1>Editing Reaction</h1>
+<div class="container">
+  <div class="bg-light p-5 rounded my-4">
+    <h2 class="col-12 ms-2">返信の編集</h2>
+  </div>
 
-<%= form_with(model: @reaction) do |form| %>
-  <% if @reaction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@reaction.errors.count, "error") %> prohibited this reaction from being saved:</h2>
+  <%= form_with(model: @reaction) do |form| %>
+    <% if @reaction.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@reaction.errors.count, "error") %> prohibited this reaction from being saved:</h2>
+        <ul>
+          <% @reaction.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-        <% @reaction.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div class="container p-5">
+      <div class="field mb-3 w-100 row ml-0 mr-0">
+        <%= form.label :body %>
+        <%= form.text_area :body, class:"col-8 form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit '投稿', class: 'btn btn-success'  %>
+      </div>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :answer_id %>
-    <%= form.text_field :answer_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
-
-<%= link_to 'Show', @reaction %> |
-<%= link_to 'Back', answer_reactions_path(@reaction.answer) %>
-
+</div>

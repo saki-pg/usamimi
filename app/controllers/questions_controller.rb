@@ -38,19 +38,29 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # 質問更新
   def update
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to question_url(@question), notice: t('.success') }
         format.json { render :show, status: :ok, location: @question }
       else
-        flash[:error] = t('.error')
+        # flash[:error] = t('.error')
+        flash[:error] = @question.errors.full_messages.join(", ")
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
+
+  # # 質問更新
+  # def update
+  #   if @question.update(question_params)
+  #     redirect_to @question, notice: '更新に成功しました'
+  #   else
+  #     flash[:error] = @question.errors.full_messages.join(", ")
+  #     render :edit, status: :unprocessable_entity
+  #   end
+  # end
 
   # 質問削除
   def destroy
@@ -83,7 +93,7 @@ class QuestionsController < ApplicationController
 
   # 信頼できるパラメータのみ許可する
   def question_params
-    params.require(:question).permit(:user_id, :title, :body, :best_answer_id)
+    params.require(:question).permit(:title, :body, :best_answer_id)
   end
 
   # ベストアンサーのセット
@@ -94,7 +104,6 @@ class QuestionsController < ApplicationController
 
   # 正しいユーザーか確認する
   def ensure_correct_user
-    @question = Question.find(params[:id])
     redirect_to(questions_path) unless @question.user_id == current_user.id
   end
 end
