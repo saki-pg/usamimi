@@ -3,7 +3,7 @@
 module Users
   class RegistrationsController < Devise::RegistrationsController
     before_action :configure_sign_up_params, only: [:create]
-    before_action :ensure_normal_user, only: [:create, :edit, :update, :destroy]
+    before_action :ensure_normal_user, only: %i[create edit update destroy]
 
     # ユーザーの新規登録を行う
     def create

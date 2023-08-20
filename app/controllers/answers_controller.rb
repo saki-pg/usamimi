@@ -74,6 +74,8 @@ class AnswersController < ApplicationController
       Question.order(created_at: :desc)
     when 'resolved'
       Question.where.not(best_answer_id: nil).order(updated_at: :desc)
+    when 'popular'
+      Question.order(views_count: :desc)
     else
       Question.all
     end

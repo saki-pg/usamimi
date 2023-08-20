@@ -9,7 +9,13 @@ class QuestionsController < ApplicationController
 
   # 質問一覧表示
   def index
-    @questions = current_user.questions.all
+    @tags = Tag.all
+    if params[:tag]
+      @tag = Tag.find_by(name: params[:tag])
+      @questions = @tag ? @tag.questions : Question.none
+    else
+      @questions = current_user.questions.all
+    end
   end
 
   # 質問詳細表示
@@ -18,10 +24,13 @@ class QuestionsController < ApplicationController
   # 新規質問作成
   def new
     @question = Question.new
+    @tags = Tag.all
   end
 
   # 質問編集
-  def edit; end
+  def edit
+    @tags = Tag.all
+  end
 
   # 質問投稿
   def create
@@ -45,22 +54,12 @@ class QuestionsController < ApplicationController
         format.json { render :show, status: :ok, location: @question }
       else
         # flash[:error] = t('.error')
-        flash[:error] = @question.errors.full_messages.join(", ")
+        flash[:error] = @question.errors.full_messages.join(', ')
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
-
-  # # 質問更新
-  # def update
-  #   if @question.update(question_params)
-  #     redirect_to @question, notice: '更新に成功しました'
-  #   else
-  #     flash[:error] = @question.errors.full_messages.join(", ")
-  #     render :edit, status: :unprocessable_entity
-  #   end
-  # end
 
   # 質問削除
   def destroy
@@ -93,12 +92,13 @@ class QuestionsController < ApplicationController
 
   # 信頼できるパラメータのみ許可する
   def question_params
-    params.require(:question).permit(:title, :body, :best_answer_id)
+    params.require(:question).permit(:title, :body, :best_answer_id, {:tag_ids => []})
   end
 
   # ベストアンサーのセット
   def set_best_answer
     return if @question.best_answer_id.blank?
+
     redirect_to @question, alert: t('questions.update.best_answer_chosen')
   end
 

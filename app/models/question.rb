@@ -10,4 +10,6 @@ class Question < ApplicationRecord
 
   validates :title, presence: true
   validates :body, presence: true
+
+  validates :views_count, presence: true
 end

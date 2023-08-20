@@ -19,6 +19,15 @@
       タイトル：<%= @question.title %><br>
       内容：<%= @question.body %><br>
     </div>
+    <div class="my-3">
+      <% @question.tags.each do |tag| %>
+
+        <%= link_to tagged_questions_path(tag_name: tag.name), class: "btn btn-info" do %>
+          <%= tag.name %>
+        <% end %>
+
+      <% end %>
+    </div>
 
     <% if @question.best_answer_id.nil? %>
       <% unless current_user.id == @question.user_id %>

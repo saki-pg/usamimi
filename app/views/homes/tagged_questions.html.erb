@@ -1,0 +1,20 @@
+
+<div class="container justify-content-center">
+  <div class="row text-center my-5">
+    <h2><%= @tag.name %> に関連する質問</h2>
+    <% @questions.each do |question| %>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <%= image_tag "rabbit_2.png", class: "card-img-top" %>
+          <div class="card-body">
+            <h4 class="card-title"><%= question.title %></h4>
+            <p class="card-text  question-body"><%= question.body %></p>
+          </div>
+          <div class="card-footer">
+            <%= link_to 'もっと見る', new_question_answer_path(question.id), class: 'btn btn-success' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

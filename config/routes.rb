@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   get 'questions/search', to: 'questions#search'
   get 'answers' => 'answers#index'
 
+  #タグ
+  get 'tags/:tag_name', to: 'homes#tagged_questions', as: :tagged_questions
+
+
   # 退会確認画面
   get '/unsubscribe', to: 'dashboards#unsubscribe', as: 'unsubscribe'
 

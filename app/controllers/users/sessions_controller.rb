@@ -5,13 +5,13 @@ module Users
     before_action :handle_deleted_user, only: [:create]
 
     # ログイン成功時のリダイレクト先を指定
-    def after_sign_in_path_for(resource)
+    def after_sign_in_path_for(_resource)
       root_path
     end
 
     def create
       self.resource = warden.authenticate!(auth_options)
-      if self.resource
+      if resource
         set_flash_message!(:notice, :signed_in)
         sign_in(resource_name, resource)
         yield resource if block_given?
@@ -21,8 +21,6 @@ module Users
         redirect_to new_user_session_path, alert: 'Invalid login credentials'
       end
     end
-
-
 
     # ゲストユーザーとしてログインするためのメソッドです。
     def guest_sign_in
@@ -46,7 +44,7 @@ module Users
     private
 
     def reject_deleted_user
-      return unless !@user.is_deleted
+      return if @user.is_deleted
 
       flash[:notice] = t('sessions.reject_user.deactivated_account')
       redirect_to new_user_registration_path
