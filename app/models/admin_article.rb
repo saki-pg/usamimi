@@ -1,0 +1,2 @@
+class AdminArticle < ApplicationRecord
+end

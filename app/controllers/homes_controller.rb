@@ -6,6 +6,7 @@ class HomesController < ApplicationController
   def top
     @tags = Tag.all
     @questions = Question.all.order(created_at: :desc)
+    @admin_articles = AdminArticle.order(created_at: :desc)
   end
 
   # タグに関連する質問を取得し、ビューに渡すメソッド

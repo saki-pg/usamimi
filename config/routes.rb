@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'admin_articles/index'
+  get 'admin_articles/show'
   root to: 'homes#top'
 
   devise_for :users, controllers: {
@@ -33,4 +35,6 @@ Rails.application.routes.draw do
       resources :reactions
     end
   end
+
+  resources :admin_articles, only: [:index, :show], path: 'articles'
 end

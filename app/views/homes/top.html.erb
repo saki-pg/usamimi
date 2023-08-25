@@ -19,7 +19,7 @@
   </div>
 
   <div class="my-5 text-center">
-    <h2>うさぎがいる生活</h2>
+    <h2 class="shippori-font">うさぎと過ごす</h2>
     <% if user_signed_in? %>
       <%= link_to "質問する", new_question_path, class: "btn btn-success btn-lg" %>
     <% else %>
@@ -27,37 +27,65 @@
     <% end %>
   </div>
 
-  <%# タグ %>
-  <div class="row text-center py-5">
-    <% @tags.each do |tag| %>
-      <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
-        <%= link_to tagged_questions_path(tag_name: tag.name) do %>
-          <div class="image-container">
-            <%= image_tag "rabbit_2.png", class: "tag-img" %>
-            <div class="overlay">
-              <div class="text"><%= tag.name %></div>
+
+  <div class="p-5">
+    <%# タグ %>
+    <div class="row text-center my-5">
+      <% @tags.each do |tag| %>
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+          <%= link_to tagged_questions_path(tag_name: tag.name) do %>
+            <div class="image-container">
+              <%= image_tag "rabbit_2.png", class: "tag-img" %>
+              <div class="overlay">
+                <div class="text"><%= tag.name %></div>
+              </div>
             </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <%# 記事 %>
+    <div class="row text-center my-5">
+      <h3 class="shippori-font my-3">記事</h3>
+      <div class="row">
+        <% @admin_articles.first(8).each_slice(4) do |slice| %>
+          <div class="row">
+            <% slice.each do |article| %>
+              <div class="col-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= link_to article.title, admin_article_path(article) %></h5>
+                    <p class="card-text"><%= truncate(article.content, length: 100) %></p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           </div>
         <% end %>
       </div>
-    <% end %>
-  </div>
+      <div class="text-end">
+        <%= link_to "すべての投稿を見る", admin_articles_path, class: "text-success" %>
+      </div>
+    </div>
 
-  <%# 質問 %>
-  <div class="row text-center">
-    <% @questions.each do |question| %>
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <%=image_tag "rabbit_2.png",class:"card-img-top" %>
-          <div class="card-body">
-            <h4 class="card-title"><%= question.title %></h4>
-            <p class="card-text question-body"><%= question.body %></p>
-          </div>
-          <div class="card-footer">
-            <%= link_to 'もっと見る', new_question_answer_path(question.id), class: 'btn btn-success' %>
+    <%# 質問 %>
+    <div class="row text-center my-5">
+      <h3 class="shippori-font my-3">新規質問</h3>
+      <% @questions.each do |question| %>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card h-100">
+            <%=image_tag "rabbit_2.png",class:"card-img-top" %>
+            <div class="card-body">
+              <h4 class="card-title"><%= question.title %></h4>
+              <p class="card-text question-body"><%= question.body %></p>
+            </div>
+            <div class="card-footer">
+              <%= link_to 'もっと見る', new_question_answer_path(question.id), class: 'btn btn-success' %>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

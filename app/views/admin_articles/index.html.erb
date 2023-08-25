@@ -1,0 +1,8 @@
+<div class="container">
+  <% @admin_articles.each do |article| %>
+    <div>
+      <h3><%= link_to article.title, admin_article_path(article) %></h3>
+      <p><%= article.content %></p>
+    </div>
+  <% end %>
+</div>

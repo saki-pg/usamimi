@@ -1,4 +1,10 @@
+@import 'reset';
 @import '~bootstrap/scss/bootstrap';
+
+
+.shippori-font {
+  font-family: 'Shippori Mincho', serif;
+}
 
 .user_color{
   background-color: #d76483;
@@ -67,3 +73,5 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+
