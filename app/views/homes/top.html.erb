@@ -52,13 +52,16 @@
         <% @admin_articles.first(8).each_slice(4) do |slice| %>
           <div class="row">
             <% slice.each do |article| %>
-              <div class="col-3">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title"><%= link_to article.title, admin_article_path(article) %></h5>
-                    <p class="card-text"><%= truncate(article.content, length: 100) %></p>
+              <div class="col-2">
+                <%= link_to admin_article_path(article), class: "text-decoration-none" do %>
+                  <div class="card article-card h-100">
+                    <%= image_tag "rabbit_2.png", class: "card-img-top" %>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= article.title %></h5>
+                      <p class="card-text article-body"><%= truncate(article.content, length: 200) %></p>
+                    </div>
                   </div>
-                </div>
+                <% end %>
               </div>
             <% end %>
           </div>
