@@ -1,4 +1,13 @@
-<div class="container">
-  <h2><%= @admin_article.title %></h2>
+<div class="container container-space">
+  <div class="bg-light p-5 rounded my-4">
+    <h2 class="col-12 ms-2"><%= @admin_article.title %></h2>
+  </div>
+
+  <% if @admin_article.image.attached? %>
+    <%= image_tag @admin_article.image, class: "card-img-top article-img" %>
+  <% end %>
+
+  <div class="my-3">
   <p><%= @admin_article.content %></p>
+  </div>
 </div>

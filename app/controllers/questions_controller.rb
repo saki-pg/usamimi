@@ -41,6 +41,7 @@ class QuestionsController < ApplicationController
         format.json { render :show, status: :created, location: @question }
       else
         flash[:error] = t('.error')
+        @tags = Tag.all
         format.html { render :new }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
@@ -88,11 +89,12 @@ class QuestionsController < ApplicationController
   # 共通の設定や制約を共有するためのコールバック
   def set_question
     @question = Question.find(params[:id])
+    @tags = Tag.all
   end
 
   # 信頼できるパラメータのみ許可する
   def question_params
-    params.require(:question).permit(:title, :body, :best_answer_id, {:tag_ids => []})
+    params.require(:question).permit(:title, :body, :image, :best_answer_id, { tag_ids: [] })
   end
 
   # ベストアンサーのセット

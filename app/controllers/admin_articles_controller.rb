@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AdminArticlesController < ApplicationController
   def index
     @admin_articles = AdminArticle.where(admin: true).order(created_at: :desc)

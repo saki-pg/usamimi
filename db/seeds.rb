@@ -6,16 +6,16 @@ User.create([
 
 Tag.delete_all
 tags = Tag.create([
-  { name: '食事' },
-  { name: '健康' },
-  { name: '環境' },
-  { name: '行動' },
-  { name: '飼い方' },
-  { name: 'グッズ' }
+    { name: '食事' },
+    { name: '健康' },
+    { name: '環境' },
+    { name: '行動' },
+    { name: '飼い方' },
+    { name: 'グッズ' }
 ])
 
 Question.create([
-    { title: '牧草', body: '牧草はなにが好きですか？', user_id: 1, tag_ids: [tags[0].id] },
+    { title: '牧草', body: '牧草はなにが好きですか？', user_id: 1, tag_ids: [tags[0].id], image: Rails.root.join("assets/images/image.jpg").open },
     { title: 'おやつ', body: 'おすすめのおやつを教えてください', user_id: 1, tag_ids: [tags[0].id] },
     { title: '鳴く', body: 'うさぎは鳴かないと聞いていたのですが、近くに来た時によくぶうぶう言います。鳴くことはありますか？', user_id: 1, tag_ids: [tags[3].id] },
     { title: '多頭飼い', body: '今８歳の子を飼っているのですが、もう１匹飼いたいと思っています。多頭飼いされている方いらっしゃいますか？うさぎの仲などどうですか？？', user_id: 1, tag_ids: [tags[2].id, tags[4].id] },
@@ -45,3 +45,56 @@ Reaction.create([
     { body: 'みなさんありがとうございます。あげたこと無かったので、りんごをあげてみようと思います！', user_id: 1, answer_id: 4 },
     { body: 'ぬいぐるみかわいいですね！', user_id: 2, answer_id: 5 }
 ])
+
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+AdminUser.find_or_create_by!(email: 'admin@example.com') do |user|
+    user.password = 'password'
+    user.password_confirmation = 'password'
+end
+
+admin_user = AdminUser.first
+
+article1 = AdminArticle.create!(
+    title: '初めての記事',
+    body: 'これはテスト記事1です。',
+    admin_user_id: admin_user.id
+)
+article1.image.attach(io: File.open(Rails.root.join('assets/images/image.jpg')), filename: 'image1.jpg', content_type: 'image/jpeg')
+
+article2 = AdminArticle.create!(
+    title: '初めての記事',
+    body: 'これはテスト記事2です。',
+    admin_user_id: admin_user.id
+)
+article2.image.attach(io: File.open(Rails.root.join('assets/images/image.jpg')), filename: 'image2.jpg', content_type: 'image/jpeg')
+
+article3 = AdminArticle.create!(
+    title: '初めての記事',
+    body: 'これはテスト記事3です。',
+    admin_user_id: admin_user.id
+)
+article3.image.attach(io: File.open(Rails.root.join('assets/images/image.jpg')), filename: 'image3.jpg', content_type: 'image/jpeg')
+
+article4 = AdminArticle.create!(
+    title: '初めての記事',
+    body: 'これはテスト記事4です。',
+    admin_user_id: admin_user.id
+)
+article4.image.attach(io: File.open(Rails.root.join('assets/images/image.jpg')), filename: 'image4.jpg', content_type: 'image/jpeg')
+
+
+article5 = AdminArticle.create!(
+    title: '初めての記事',
+    body: 'これはテスト記事5です。',
+    admin_user_id: admin_user.id
+)
+article5.image.attach(io: File.open(Rails.root.join('assets/images/image.jpg')), filename: 'image5.jpg', content_type: 'image/jpeg')
+
+article6 = AdminArticle.create!(
+    title: '初めての記事',
+    body: 'これはテスト記事6です。',
+    admin_user_id: admin_user.id
+)
+article6.image.attach(io: File.open(Rails.root.join('assets/images/image.jpg')), filename: 'image6.jpg', content_type: 'image/jpeg')

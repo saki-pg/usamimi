@@ -1,11 +1,10 @@
 <div class="container justify-content-center">
-
   <div class="container justify-content-center">
     <div id="carouselExampleIndicators" class="carousel slide p-0" data-bs-ride="carousel" style="width: 100%; height: 600px;">
       <div class="carousel-inner">
         <div class="carousel-item active" style="background-image: url('<%= asset_url 'main.jpg' %>'); background-size: cover;"></div>
-        <div class="carousel-item" style="background-image: url('<%= asset_url 'rabbit_2.png' %>'); background-size: cover;"></div>
-        <div class="carousel-item" style="background-image: url('<%= asset_url 'logo.png' %>'); background-size: cover;"></div>
+        <div class="carousel-item" style="background-image: url('<%= asset_url 'main_2.jpg' %>'); background-size: cover;"></div>
+        <div class="carousel-item" style="background-image: url('<%= asset_url 'main_3.jpg' %>'); background-size: cover;"></div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -28,37 +27,26 @@
   </div>
 
 
-  <div class="p-5">
-    <%# タグ %>
-    <div class="row text-center my-5">
-      <% @tags.each do |tag| %>
-        <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
-          <%= link_to tagged_questions_path(tag_name: tag.name) do %>
-            <div class="image-container">
-              <%= image_tag "rabbit_2.png", class: "tag-img" %>
-              <div class="overlay">
-                <div class="text"><%= tag.name %></div>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-
+  <div class="px-5 pt-2">
     <%# 記事 %>
     <div class="row text-center my-5">
-      <h3 class="shippori-font my-3">記事</h3>
-      <div class="row">
-        <% @admin_articles.first(8).each_slice(4) do |slice| %>
+      <h4 class="shippori-font my-3">記事</h4>
+      <div class="row justify-content-center">
+        <% @admin_articles.first(12).each_slice(6) do |slice| %>
           <div class="row">
             <% slice.each do |article| %>
-              <div class="col-2">
+              <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                 <%= link_to admin_article_path(article), class: "text-decoration-none" do %>
                   <div class="card article-card h-100">
-                    <%= image_tag "rabbit_2.png", class: "card-img-top" %>
+                    <div class="card-img-container">
+                      <% if article.image.attached? %>
+                        <%= image_tag article.image, class: "card-img-top article-img" %>
+                      <% else %>
+                        <%= image_tag "news.png", class: "card-img-top article-img" %>
+                      <% end %>
+                    </div>
                     <div class="card-body">
-                      <h5 class="card-title"><%= article.title %></h5>
-                      <p class="card-text article-body"><%= truncate(article.content, length: 200) %></p>
+                      <h5 class="card-title article-title"><%= article.title %></h5>
                     </div>
                   </div>
                 <% end %>
@@ -72,15 +60,39 @@
       </div>
     </div>
 
+    <%# タグ %>
+    <div class="row text-center justify-content-center my-5">
+      <h4 class="shippori-font my-3">質問カテゴリー</h4>
+      <% @tags.each_with_index do |tag, index| %>
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+          <%= link_to tagged_questions_path(tag_name: tag.name) do %>
+            <div class="image-container">
+              <% image_name = "tag_#{index + 1}.jpg" %>
+              <%= image_tag image_name, class: "tag-img" %>
+              <div class="overlay">
+                <div class="text shippori-font"><h5><%= tag.name %></h5></div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
     <%# 質問 %>
-    <div class="row text-center my-5">
-      <h3 class="shippori-font my-3">新規質問</h3>
+    <div class="row text-center my-5 p-3">
+      <h4 class="shippori-font my-3">新規質問</h4>
       <% @questions.each do |question| %>
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card h-100">
-            <%=image_tag "rabbit_2.png",class:"card-img-top" %>
+            <div class="card-img-container">
+              <% if question.image.attached? %>
+                <%= image_tag question.image, class: "card-img-top" %>
+              <% else %>
+                <%= image_tag "question.png", class: "card-img-top" %>
+              <% end %>
+            </div>
             <div class="card-body">
-              <h4 class="card-title"><%= question.title %></h4>
+              <h4 class="card-title question-title"><%= question.title %></h4>
               <p class="card-text question-body"><%= question.body %></p>
             </div>
             <div class="card-footer">

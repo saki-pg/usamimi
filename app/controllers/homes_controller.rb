@@ -5,8 +5,8 @@ class HomesController < ApplicationController
   # すべての質問を新しい順に取得し、ビューに渡すメソッド
   def top
     @tags = Tag.all
-    @questions = Question.all.order(created_at: :desc)
-    @admin_articles = AdminArticle.order(created_at: :desc)
+    @questions = Question.all.order(created_at: :desc).limit(12)
+    @admin_articles = AdminArticle.order(created_at: :desc).limit(6)
   end
 
   # タグに関連する質問を取得し、ビューに渡すメソッド
