@@ -10,4 +10,7 @@ class AdminArticle < ApplicationRecord
   def self.ransackable_associations(_auth_object = nil)
     []
   end
+
+  validates :title, presence: true
+  validates :content, presence: true
 end

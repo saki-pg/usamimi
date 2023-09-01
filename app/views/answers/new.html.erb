@@ -108,7 +108,9 @@
                           この回答を削除してよろしいですか？
                         </div>
                         <div class="modal-footer">
-                          <%= link_to "削除", answer_path(answer), method: :delete, class: "btn btn-danger" %>
+                          <% if @answer.persisted? %>
+                            <%= link_to "削除", answer_path(@answer), method: :delete, class: "btn btn-danger" %>
+                          <% end %>
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
                         </div>
                       </div>

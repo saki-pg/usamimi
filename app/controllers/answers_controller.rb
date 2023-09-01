@@ -89,7 +89,7 @@ class AnswersController < ApplicationController
         format.json { render :show, status: :created, location: @answer }
       else
         flash[:error] = fail_msg
-        format.html { render fail_action }
+        format.html { render fail_action, locals: { answer: @answer } }
         format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
     end

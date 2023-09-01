@@ -1,18 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "AdminArticles", type: :request do
+  let(:article) { create(:admin_article) }
+
   describe "GET /index" do
     it "成功したレスポンスを返すこと" do
-      get "/articles"
-      expect(response).to have_http_status(:success)
+      get admin_articles_path
+      expect(response).to have_http_status(200)
     end
   end
 
   describe "GET /show" do
-    it "成功したレスポンスを返すこと" do
-      admin_article = create(:admin_article)
-      get "/articles/#{admin_article.id}"
-      expect(response).to have_http_status(:success)
+    it "HTTPステータスが成功を返すこと" do
+      get admin_article_path(article)
+      expect(response).to have_http_status(200)
     end
   end
 end

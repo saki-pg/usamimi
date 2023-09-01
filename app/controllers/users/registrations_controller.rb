@@ -3,7 +3,7 @@
 module Users
   class RegistrationsController < Devise::RegistrationsController
     before_action :configure_sign_up_params, only: [:create]
-    before_action :ensure_normal_user, only: %i[create edit update destroy]
+    before_action :ensure_normal_user, only: [:create]
 
     # ユーザーの新規登録を行う
     def create
@@ -58,7 +58,7 @@ module Users
 
     # リソースが正常に作成された場合の処理
     def handle_successful_resource_creation(resource)
-      set_flash_for(resource)
+      assign_flash_for(resource)
 
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
@@ -98,11 +98,11 @@ module Users
     end
 
     # ユーザー登録成功時のフラッシュメッセージを設定
-    def set_flash_for(resource)
+    def assign_flash_for(resource)
       if resource.active_for_authentication?
-        set_flash_message! :notice, :signed_up
+        assign_flash_message! :notice, :signed_up
       else
-        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        assign_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
       end
     end
   end
