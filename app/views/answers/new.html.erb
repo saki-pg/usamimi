@@ -1,6 +1,6 @@
 <div class="container">
   <div class="bg-light p-5 rounded my-4">
-    <h2 class="col-12 ms-2">質問</h2>
+    <h2 class="col-12 ms-2">回答する</h2>
   </div>
 
   <div class="my-3">
@@ -21,11 +21,14 @@
     </div>
     <div class="my-3">
       <% @question.tags.each do |tag| %>
-
         <%= link_to tagged_questions_path(tag_name: tag.name), class: "btn btn-info" do %>
           <%= tag.name %>
         <% end %>
-
+      <% end %>
+    </div>
+    <div>
+      <% if @question.image.attached? %>
+        <%= image_tag @question.image, class: "article-img my-5" %>
       <% end %>
     </div>
 
@@ -84,7 +87,10 @@
 
                 <% if current_user.id == answer.user_id %>
                   <div>
-                    <%= link_to "編集", edit_answer_path(answer), class: "btn btn-light" %>
+                    <% if answer && answer.persisted? %>
+                      <%= link_to "編集", edit_answer_path(answer), class: "btn btn-light" %>
+                    <% end %>
+
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-<%= answer.id %>">
                       削除
                     </button>
@@ -102,7 +108,9 @@
                           この回答を削除してよろしいですか？
                         </div>
                         <div class="modal-footer">
-                          <%= link_to "削除", answer_path(answer), method: :delete, class: "btn btn-danger" %>
+                          <% if @answer.persisted? %>
+                            <%= link_to "削除", answer_path(@answer), method: :delete, class: "btn btn-danger" %>
+                          <% end %>
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
                         </div>
                       </div>

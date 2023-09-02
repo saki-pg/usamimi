@@ -6,4 +6,8 @@ class Reaction < ApplicationRecord
   belongs_to :answer
 
   validates :body, presence: true
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[answer_id body created_at id updated_at user_id]
+  end
 end

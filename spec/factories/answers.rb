@@ -3,6 +3,5 @@ FactoryBot.define do
     body { "Answer body" }
     question
     user
-    # 他の属性もここに定義します。
   end
 end

@@ -11,7 +11,7 @@ RSpec.describe "Questions", type: :request do
   describe "GET /index" do
     it "HTTPステータスが成功を返すこと" do
       get questions_path
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -20,7 +20,7 @@ RSpec.describe "Questions", type: :request do
     let(:question) { create(:question, user: user) }
     it "HTTPステータスが成功を返すこと" do
       get question_path(question)
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.describe "Questions", type: :request do
   describe "GET /new" do
     it "HTTPステータスが成功を返すこと" do
       get new_question_path
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(200)
     end
   end
 
@@ -37,7 +37,7 @@ RSpec.describe "Questions", type: :request do
     let(:question) { create(:question, user: user) }
     it "HTTPステータスが成功を返すこと" do
       get edit_question_path(question)
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(200)
     end
   end
 

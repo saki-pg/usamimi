@@ -12,13 +12,13 @@ module Users
     def create
       self.resource = warden.authenticate!(auth_options)
       if resource
-        set_flash_message!(:notice, :signed_in)
+        assign_flash_message!(:notice, :signed_in)
         sign_in(resource_name, resource)
         yield resource if block_given?
         respond_with resource, location: after_sign_in_path_for(resource)
       else
         # ログイン失敗時のリダイレクト先を指定
-        redirect_to new_user_session_path, alert: 'Invalid login credentials'
+        redirect_to new_user_session_path, alert: t('sessions.invalid_login')
       end
     end
 

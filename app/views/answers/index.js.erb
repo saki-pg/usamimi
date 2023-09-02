@@ -1,10 +1,16 @@
 $('#sort .row.text-center').html('<% @questions.each do |question| %>\
   <div class="col-lg-3 col-md-6 mb-4">\
     <div class="card h-100">\
-      <%= j image_tag("rabbit_2.png",class:"card-img-top") %>\
+      <div class="card-img-container">\
+        <% if question.image.attached? %>\
+          <%= j image_tag(question.image, class: "card-img-top") %>\
+        <% else %>\
+          <%= j image_tag("question.png", class: "card-img-top") %>\
+        <% end %>\
+      </div>\
       <div class="card-body">\
-        <h4 class="card-title"><%= question.title %></h4>\
-        <p class="card-text"><%= question.body %></p>\
+        <h4 class="card-title question-title"><%= question.title %></h4>\
+        <p class="card-text question-body"><%= question.body %></p>\
       </div>\
       <div class="card-footer">\
         <%= j link_to '回答する', new_question_answer_path(question.id), class: 'link-success' %>\

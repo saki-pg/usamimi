@@ -34,9 +34,9 @@ class AnswersController < ApplicationController
   # 回答を更新する
   def update
     if @answer.update(answer_params)
-      redirect_to @answer, notice: '更新に成功しました'
+      redirect_to @answer, notice: t('answer.update.success')
     else
-      flash[:error] = '更新に失敗しました'
+      flash[:error] = t('answer.update.fail')
       render :edit, status: :unprocessable_entity
     end
   end
@@ -89,7 +89,7 @@ class AnswersController < ApplicationController
         format.json { render :show, status: :created, location: @answer }
       else
         flash[:error] = fail_msg
-        format.html { render fail_action }
+        format.html { render fail_action, locals: { answer: @answer } }
         format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
     end

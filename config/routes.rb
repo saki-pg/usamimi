@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'admin_articles/index'
-  get 'admin_articles/show'
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   root to: 'homes#top'
 
   devise_for :users, controllers: {
@@ -22,7 +22,6 @@ Rails.application.routes.draw do
 
   #タグ
   get 'tags/:tag_name', to: 'homes#tagged_questions', as: :tagged_questions
-
 
   # 退会確認画面
   get '/unsubscribe', to: 'dashboards#unsubscribe', as: 'unsubscribe'

@@ -15,7 +15,7 @@ RSpec.describe Answer, type: :model do
     let(:question) { create(:question) }
     let(:user) { create(:user) }
     let!(:answer) { create(:answer, question: question, user: user) }
-    
+
     it '回答が削除された際、関連するリアクションも削除される' do
       create_list(:reaction, 3, answer: answer)
       expect { answer.destroy }.to change { Reaction.count }.by(-3)

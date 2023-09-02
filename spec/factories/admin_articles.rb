@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :admin_article do
-    title { "MyString" }
-    content { "MyText" }
-    admin { false }
+    title { "Admin_article title" }
+    content { "Admin_article content" }
   end
 end

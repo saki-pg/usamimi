@@ -37,7 +37,7 @@ RSpec.describe AnswersController, type: :request do
           }.not_to change(Answer, :count)
 
           expect(response.body).to include('1 error prohibited this answer from being saved:')
-          expect(response.body).to include('内容 を入力してください')
+          expect(response.body).to include('内容を入力してください')
         end
       end
     end

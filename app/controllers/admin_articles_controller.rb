@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class AdminArticlesController < ApplicationController
   def index
-    @admin_articles = AdminArticle.where(admin: true).order(created_at: :desc)
+    @admin_articles = AdminArticle.order(created_at: :desc).limit(50)
   end
 
   def show
