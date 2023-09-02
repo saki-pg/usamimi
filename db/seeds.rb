@@ -29,25 +29,25 @@ questions = Question.create!([
 
 Answer.delete_all
 answers = Answer.create!([
-    { body: 'いま３歳ですが、チモシーのカナダ産が好きでよく食べます', question_id: questions[0].id, user_id: users[1].id },
-    { body: 'パスチャーチモシーを買っています。小さい時はパスチャーアルファルファをよく食べていました。', question_id: questions[0].id, user_id: users[2].id },
-    { body: '乾燥ニンジンが好きです！走って食べにきます！', question_id: questions[1].id, user_id: users[1].id },
-    { body: 'オーツヘイと乾燥りんごがお気に入りの様です😊', question_id: questions[1].id, user_id: users[2].id },
-    { body: 'うさぎのぬいぐるみがあるのですが、隣で座ったりしています', question_id: questions[4].id, user_id: users[0].id },
-    { body: 'ダンボールをほじほじして遊んでいます笑', question_id: questions[4].id, user_id: users[2].id },
-    { body: '毎日1時間くらい部屋に出しています。', question_id: questions[5].id, user_id: users[0].id },
-    { body: '外に時々さんぽに連れていきます。リードをつけて公園内を少し歩きますよ。', question_id: questions[5].id, user_id: users[2].id },
-    { body: '毎日牧草とペレットをあげています。時々おやつもあげますよ', question_id: questions[6].id, user_id: users[0].id },
-    { body: '牧草は切らさないようにしなくてはいけません。時期によってあげる牧草も違い、子うさぎの時はアルファルファ、成うさぎにはチモシーをあげます。', question_id: questions[6].id, user_id: users[1].id },
-    { body: 'ホームセンターで購入しましたが、うさちゃんが5,000~10,000円。ゲージ、トイレ、家、水飲み、餌購入で15,000~20,000円くらいでしょうか。', question_id: questions[7].id, user_id: users[0].id },
-    { body: '2〜3万円くらいかなあ', question_id: questions[7].id, user_id: users[1].id }
+    { body: 'いま３歳ですが、チモシーのカナダ産が好きでよく食べます', question: questions[0], user: users[1] },
+    { body: 'パスチャーチモシーを買っています。小さい時はパスチャーアルファルファをよく食べていました。', question: questions[0], user: users[2] },
+    { body: '乾燥ニンジンが好きです！走って食べにきます！', question: questions[1], user: users[1] },
+    { body: 'オーツヘイと乾燥りんごがお気に入りの様です😊', question: questions[1], user: users[2] },
+    { body: 'うさぎのぬいぐるみがあるのですが、隣で座ったりしています', question: questions[4], user: users[0] },
+    { body: 'ダンボールをほじほじして遊んでいます笑', question: questions[4], user: users[2] },
+    { body: '毎日1時間くらい部屋に出しています。', question: questions[5], user: users[0] },
+    { body: '外に時々さんぽに連れていきます。リードをつけて公園内を少し歩きますよ。', question: questions[5], user: users[2] },
+    { body: '毎日牧草とペレットをあげています。時々おやつもあげますよ', question: questions[6], user: users[0] },
+    { body: '牧草は切らさないようにしなくてはいけません。時期によってあげる牧草も違い、子うさぎの時はアルファルファ、成うさぎにはチモシーをあげます。', question: questions[6], user: users[1] },
+    { body: 'ホームセンターで購入しましたが、うさちゃんが5,000~10,000円。ゲージ、トイレ、家、水飲み、餌購入で15,000~20,000円くらいでしょうか。', question: questions[7], user: users[0] },
+    { body: '2〜3万円くらいかなあ', question: questions[7], user: users[1] }
 ])
 
 Reaction.delete_all
 reactions = Reaction.create!([
-    { body: 'カナダ産ためしてみます😄', user_id: users[0].id, answer_id: answers[0].id },
-    { body: 'みなさんありがとうございます。あげたこと無かったので、りんごをあげてみようと思います！', user_id: users[0].id, answer_id: answers[3].id },
-    { body: 'ぬいぐるみかわいいですね！', user_id: users[1].id, answer_id: answers[4].id }
+    { body: 'カナダ産ためしてみます😄', user: users[0], answer: answers[0] },
+    { body: 'みなさんありがとうございます。あげたこと無かったので、りんごをあげてみようと思います！', user: users[0], answer: answers[3] },
+    { body: 'ぬいぐるみかわいいですね！', user: users[1], answer: answers[4] }
 ])
 
 AdminUser.find_or_create_by!(email: ENV['ADMIN_EMAIL']) do |user|
@@ -71,7 +71,7 @@ article2 = AdminArticle.create!(
     産地別でも味が違うようで、お試しキット等でうさぎの好みを知ることができます。'
 )
 article2.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'article_2.jpg')), filename: 'article_2.jpg', content_type: 'image/jpeg')
-
+article2.save
 
 article3 = AdminArticle.create!(
     title: 'うさぎの適温',
@@ -81,7 +81,7 @@ article3 = AdminArticle.create!(
     クーラーやうさぎのための冷感グッズ（ペット用クーラー、アルミプレート、天然石プレートなど）でぜひ対策されてみてください。'
 )
 article3.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'article_3.jpg')), filename: 'article_3.jpg', content_type: 'image/jpeg')
-
+article3.save
 
 article4 = AdminArticle.create!(
     title: 'そろそろ換毛期',
@@ -92,7 +92,7 @@ article4 = AdminArticle.create!(
     床の毛の掃除はコロコロが便利ですね。'
 )
 article4.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'article_4.jpg')), filename: 'article_4.jpg', content_type: 'image/jpeg')
-
+article4.save
 
 article5 = AdminArticle.create!(
     title: '爪切り',
@@ -105,7 +105,7 @@ article5 = AdminArticle.create!(
     '
 )
 article5.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'article_5.jpg')), filename: 'article_5.jpg', content_type: 'image/jpeg')
-
+article5.save
 
 article6 = AdminArticle.create!(
     title: 'うさぎの歯',
