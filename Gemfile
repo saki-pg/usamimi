@@ -7,7 +7,7 @@ gem 'rails-i18n', '~> 6.0'
 
 gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
-gem 'webpacker', '5.4.3'
+gem 'webpacker', '5.4.4'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 
