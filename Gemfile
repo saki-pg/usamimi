@@ -20,7 +20,6 @@ gem 'listen', '>= 3.0.5', '< 3.2'
 
 group :production do
   gem 'pg'
-  gem 'dotenv-rails'
 end
 
 group :development, :test do
@@ -31,6 +30,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'sqlite3', '~> 1.4'
+  gem 'dotenv-rails'
 end
 
 group :development do
