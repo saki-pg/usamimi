@@ -12,7 +12,7 @@ module Users
     def create
       self.resource = warden.authenticate!(auth_options)
       if resource
-        assign_flash_message!(:notice, :signed_in)
+        show_flash_message(:notice, :signed_in) # 独自のメソッドを使用
         sign_in(resource_name, resource)
         yield resource if block_given?
         respond_with resource, location: after_sign_in_path_for(resource)
@@ -42,6 +42,10 @@ module Users
     end
 
     private
+
+    def show_flash_message(key, value)
+      flash[key] = I18n.t(value, scope: %i[devise sessions])
+    end
 
     def reject_deleted_user
       return if @user.is_deleted
