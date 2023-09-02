@@ -1,26 +1,25 @@
 <div class="container container-space p-5">
-  <div class="row">
-    <% @admin_articles.first(12).each_slice(6) do |slice| %>
-      <div class="row">
-        <% slice.each do |article| %>
-          <div class="col-lg-2 col-md-4 col-sm-6 col-12 mb-3">
-            <%= link_to admin_article_path(article), class: "text-decoration-none" do %>
-              <div class="card article-card h-100">
-                <div class="card-img-container">
-                  <% if article.image.attached? %>
-                    <%= image_tag article.image, class: "card-img-top article-img" %>
-                  <% else %>
-                    <%= image_tag "news.png", class: "card-img-top article-img" %>
-                  <% end %>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title article-title"><%= article.title %></h5>
-                </div>
+  <h4 class="shippori-font text-center my-3">全ての記事</h4>
+  <% @admin_articles.first(12).each_slice(6) do |slice| %>
+    <div class="row">
+      <% slice.each do |article| %>
+        <div class="col-lg-2 col-md-4 col-sm-6 col-12 mb-3">
+          <%= link_to admin_article_path(article), class: "text-decoration-none" do %>
+            <div class="card article-card h-100">
+              <div class="card-img-container">
+                <% if article.image.attached? %>
+                  <%= image_tag article.image, class: "card-img-top article-img" %>
+                <% else %>
+                  <%= image_tag "news.png", class: "card-img-top article-img" %>
+                <% end %>
               </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+              <div class="card-body">
+                <h5 class="card-title article-title"><%= article.title %></h5>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>

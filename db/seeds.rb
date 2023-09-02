@@ -15,7 +15,7 @@ tags = Tag.create([
 ])
 
 Question.create([
-    { title: '牧草', body: '牧草はなにが好きですか？', user_id: 1, tag_ids: [tags[0].id], image: Rails.root.join("assets/images/image.jpg").open },
+    { title: '牧草', body: '牧草はなにが好きですか？', user_id: 1, tag_ids: [tags[0].id]},
     { title: 'おやつ', body: 'おすすめのおやつを教えてください', user_id: 1, tag_ids: [tags[0].id] },
     { title: '鳴く', body: 'うさぎは鳴かないと聞いていたのですが、近くに来た時によくぶうぶう言います。鳴くことはありますか？', user_id: 1, tag_ids: [tags[3].id] },
     { title: '多頭飼い', body: '今８歳の子を飼っているのですが、もう１匹飼いたいと思っています。多頭飼いされている方いらっしゃいますか？うさぎの仲などどうですか？？', user_id: 1, tag_ids: [tags[2].id, tags[4].id] },
@@ -24,6 +24,7 @@ Question.create([
     { title: '食べ物', body: 'うさぎって何を食べるんですか', user_id: 3, tag_ids: [tags[0].id] },
     { title: '費用', body: '飼い始めるにはどれくらいの費用がかかりますか？', user_id: 3, tag_ids: [tags[2].id] }
 ])
+
 
 Answer.create([
     { body: 'いま３歳ですが、チモシーのカナダ産が好きでよく食べます', question_id: 1, user_id: 2 },
@@ -54,47 +55,62 @@ AdminUser.find_or_create_by!(email: 'admin@example.com') do |user|
     user.password_confirmation = 'password'
 end
 
-admin_user = AdminUser.first
-
 article1 = AdminArticle.create!(
-    title: '初めての記事',
-    body: 'これはテスト記事1です。',
-    admin_user_id: admin_user.id
+    title: 'おやつ',
+    content: 'うさぎ用のおやつはたくさん販売されていますが、砂糖などの添加がないものがおすすめです。\n
+    乾燥にんじんや、乾燥パパイヤ、乾燥りんごなど好みがありますが、喜んで食べてくれます。\n\n
+    食べれる薬膳もあるようです。'
 )
-article1.image.attach(io: File.open(Rails.root.join('assets/images/image.jpg')), filename: 'image1.jpg', content_type: 'image/jpeg')
 
 article2 = AdminArticle.create!(
-    title: '初めての記事',
-    body: 'これはテスト記事2です。',
-    admin_user_id: admin_user.id
+    title: 'うさぎの牧草',
+    content: 'うさぎの牧草はアルファルファ（マメ科）、チモシー（イネ科）がありますが、\n
+    栄養のあるアルファルファは成年前、繊維質のチモシーは成年後に適しています。\n\n
+
+    チモシーは、刈り取り時期が違う１番草、２番草、３番草があり、３番草が１番柔らかいです。\n
+    産地別でも味が違うようで、お試しキット等でうさぎの好みを知ることができます。'
 )
-article2.image.attach(io: File.open(Rails.root.join('assets/images/image.jpg')), filename: 'image2.jpg', content_type: 'image/jpeg')
+article2.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'article_2.jpg')), filename: 'article_2.jpg', content_type: 'image/jpeg')
+
 
 article3 = AdminArticle.create!(
-    title: '初めての記事',
-    body: 'これはテスト記事3です。',
-    admin_user_id: admin_user.id
+    title: 'うさぎの適温',
+    content: '今年の夏は暑いですね☀️\n
+    うさぎを飼育する時の適正温度は、室温15～25℃・湿度40～60%位が理想といわれています。\n\n
+
+    クーラーやうさぎのための冷感グッズ（ペット用クーラー、アルミプレート、天然石プレートなど）でぜひ対策されてみてください。'
 )
-article3.image.attach(io: File.open(Rails.root.join('assets/images/image.jpg')), filename: 'image3.jpg', content_type: 'image/jpeg')
+article3.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'article_3.jpg')), filename: 'article_3.jpg', content_type: 'image/jpeg')
+
 
 article4 = AdminArticle.create!(
-    title: '初めての記事',
-    body: 'これはテスト記事4です。',
-    admin_user_id: admin_user.id
+    title: 'そろそろ換毛期',
+    content: 'うさぎの換毛期は主に、夏毛に生え変わる春の4月ごろ・冬毛に生え変わる秋の10月ごろといわれています。\n
+    うさぎによって抜け方も違うようですが、触るとすごい毛が抜けたり驚くことがあります。\n\n
+
+    この時期のブラッシングにはシリコンのブラシを使っていますが、柔らかい素材で安心して使えます。\n
+    床の毛の掃除はコロコロが便利ですね。'
 )
-article4.image.attach(io: File.open(Rails.root.join('assets/images/image.jpg')), filename: 'image4.jpg', content_type: 'image/jpeg')
+article4.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'article_4.jpg')), filename: 'article_4.jpg', content_type: 'image/jpeg')
 
 
 article5 = AdminArticle.create!(
-    title: '初めての記事',
-    body: 'これはテスト記事5です。',
-    admin_user_id: admin_user.id
+    title: '爪切り',
+    content: '爪切りの頻度は、うさぎによって差がありますが、およそ1～2ヶ月に1度は必要といわれています。\n
+    伸びてくると、ひっかかったり折れたり、ケガにつながる可能性があります。\n\n
+
+    動物病院やうさぎのペットショップで切ってくれますね。\n
+    自宅でやる場合、爪切りが切りやすいものとそうでないものがあったりします。\n
+    使いやすいものを探してみるとすんなり切りやすいと思います。
+    '
 )
-article5.image.attach(io: File.open(Rails.root.join('assets/images/image.jpg')), filename: 'image5.jpg', content_type: 'image/jpeg')
+article5.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'article_5.jpg')), filename: 'article_5.jpg', content_type: 'image/jpeg')
+
 
 article6 = AdminArticle.create!(
-    title: '初めての記事',
-    body: 'これはテスト記事6です。',
-    admin_user_id: admin_user.id
+    title: 'うさぎの歯',
+    content: 'うさぎの歯は28本あり、1日に0.5cmくらいのびるようです。\n
+    歯が伸びすぎてしまうと噛み合わせが悪くなり、病気に繋がってしまいます。\n\n
+
+    固めの牧草中心の食生活をすることで予防することができます。'
 )
-article6.image.attach(io: File.open(Rails.root.join('assets/images/image.jpg')), filename: 'image6.jpg', content_type: 'image/jpeg')

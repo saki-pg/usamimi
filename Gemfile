@@ -5,7 +5,6 @@ ruby '3.1.4'
 gem 'rails', '~> 6.1.7'
 gem 'rails-i18n', '~> 6.0'
 
-
 gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
@@ -42,9 +41,9 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver', '>= 4.0.0.rc1'
-  gem 'webdrivers'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'webdrivers', '~> 4.0', require: false
   gem 'shoulda-matchers'
 end
 
@@ -52,3 +51,4 @@ gem 'font-awesome-sass'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'rails-controller-testing'
 gem 'bootstrap', '~> 5.1.0'
+gem 'aws-sdk-s3', require: false

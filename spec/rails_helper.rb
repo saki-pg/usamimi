@@ -8,8 +8,7 @@ require 'shoulda/matchers'
 require 'capybara/rspec'
 require 'selenium-webdriver'
 require 'webdrivers'
-# Webdrivers::Chromedriver.required_version = '114.0.5735.90'
-
+Webdrivers::Chromedriver.required_version = '116.0.5845'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -20,7 +19,7 @@ Capybara.register_driver :selenium_chrome_headless_docker_friendly do |app|
     opts.args << '--disable-dev-shm-usage'
     opts.args << '--window-size=1400,1400'
   end,
-  service: ::Selenium::WebDriver::Chrome::Service.new(path: "/usr/local/bin/chromedriver"))
+  service: ::Selenium::WebDriver::Chrome::Service.new(path: Webdrivers::Chromedriver.driver_path))
 end
 
 
