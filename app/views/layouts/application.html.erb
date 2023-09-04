@@ -19,12 +19,11 @@
     <header class="bg-light">
       <!-- Navigation -->
       <div class="d-flex flex-column flex-md-row align-items-center justify-content-between p-1 px-md-4 header-container shadow-sm">
-
         <div class="header-left-container d-flex">
           <%= link_to root_path do %>
             <%= image_tag("logo.png", height: '50px', class: "navbar-brand my-0 font-weight-normal", id: "home-logo", alt: "ロゴ") %>
           <% end %>
-          <div class="header-search-container mt-3">
+          <div class="header-search-container mt-3 d-none d-md-block">
             <div class="header-search-box">
               <%= form_with url: questions_search_path,method: :get,local: true do |f| %>
                 <i class="fas fa-search"></i>
@@ -103,7 +102,6 @@
       <div class="container">
         <p class="m-0 text-center text-black">2023 Usamimi</p>
       </div>
-      <!-- /.container -->
     </footer>
   </body>
 </html>

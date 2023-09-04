@@ -1,5 +1,6 @@
 <div class="container container-space p-5">
   <h4 class="shippori-font text-center my-3">全ての記事</h4>
+
   <% @admin_articles.first(12).each_slice(6) do |slice| %>
     <div class="row">
       <% slice.each do |article| %>

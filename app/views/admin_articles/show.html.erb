@@ -4,11 +4,10 @@
   </div>
 
   <% if @admin_article.image.attached? %>
-    <%= image_tag @admin_article.image, class: "card-img-top article-img" %>
+    <%= image_tag @admin_article.image, class: "card-img-top article-show-img" %>
   <% end %>
 
   <div class="my-3">
-  <p class="text-center"><%= @admin_article.content.gsub("\n", "<br>").html_safe %></p>
-
+  <p class="text-center"><%= @admin_article.content.html_safe %></p>
   </div>
 </div>

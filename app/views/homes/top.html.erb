@@ -2,7 +2,7 @@
   <div class="container justify-content-center">
     <div id="carouselExampleIndicators" class="carousel slide p-0" data-bs-ride="carousel" style="width: 100%; height: 600px;">
       <div class="carousel-inner">
-        <div class="carousel-item active" style="background-image: url('<%= asset_url 'main.jpg' %>'); background-size: cover;"></div>
+        <div class="carousel-item active" style="background-image: url('<%= asset_url 'main_1.jpg' %>'); background-size: cover;"></div>
         <div class="carousel-item" style="background-image: url('<%= asset_url 'main_2.jpg' %>'); background-size: cover;"></div>
         <div class="carousel-item" style="background-image: url('<%= asset_url 'main_3.jpg' %>'); background-size: cover;"></div>
       </div>
@@ -17,6 +17,59 @@
     </div>
   </div>
 
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const carouselItems = document.querySelectorAll('.carousel-item');
+    const lgBreakpoint = 992;
+    const xsBreakpoint = 576;
+    const customBreakpoint = 450;
+
+    const customImages = [
+      '<%= asset_url("custom_main_1.jpg") %>',
+      '<%= asset_url("custom_main_2.jpg") %>',
+      '<%= asset_url("custom_main_3.jpg") %>'
+    ];
+
+    const xsImages = [
+      '<%= asset_url("xs_main_1.jpg") %>',
+      '<%= asset_url("xs_main_2.jpg") %>',
+      '<%= asset_url("xs_main_3.jpg") %>'
+    ];
+
+    const lgImages = [
+      '<%= asset_url("lg_main_1.jpg") %>',
+      '<%= asset_url("lg_main_2.jpg") %>',
+      '<%= asset_url("lg_main_3.jpg") %>'
+    ];
+
+    const defaultImages = [
+      '<%= asset_url("main_1.jpg") %>',
+      '<%= asset_url("main_2.jpg") %>',
+      '<%= asset_url("main_3.jpg") %>'
+    ];
+
+    function changeCarouselImages() {
+      let windowWidth = window.innerWidth;
+
+      carouselItems.forEach((item, index) => {
+        if (windowWidth <= customBreakpoint) {
+          item.style.backgroundImage = `url('${customImages[index]}')`;
+        } else if (windowWidth < xsBreakpoint) {
+          item.style.backgroundImage = `url('${xsImages[index]}')`;
+        } else if (windowWidth < lgBreakpoint) {
+          item.style.backgroundImage = `url('${lgImages[index]}')`;
+        } else {
+          item.style.backgroundImage = `url('${defaultImages[index]}')`;
+        }
+      });
+    }
+
+    changeCarouselImages();
+    window.addEventListener('resize', changeCarouselImages);
+  });
+  </script>
+
+
   <div class="my-5 text-center">
     <h2 class="shippori-font">うさぎと過ごす</h2>
     <% if user_signed_in? %>
@@ -29,32 +82,26 @@
 
   <div class="px-5 pt-2">
     <%# 記事 %>
-    <div class="text-center my-5">
+    <div class="row text-center my-5">
       <h4 class="shippori-font my-3">記事</h4>
-      <div class="justify-content-center">
-        <% @admin_articles.first(12).each_slice(6) do |slice| %>
-          <div class="row">
-            <% slice.each do |article| %>
-              <div class="col-lg-2 col-md-4 col-sm-6 col-12 mb-3">
-                <%= link_to admin_article_path(article), class: "text-decoration-none" do %>
-                  <div class="card article-card h-100">
-                    <div class="card-img-container">
-                      <% if article.image.attached? %>
-                        <%= image_tag article.image, class: "card-img-top article-img" %>
-                      <% else %>
-                        <%= image_tag "news.png", class: "card-img-top article-img" %>
-                      <% end %>
-                    </div>
-                    <div class="card-body">
-                      <h5 class="card-title article-title"><%= article.title %></h5>
-                    </div>
-                  </div>
+      <% @admin_articles.each do |article| %>
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+          <%= link_to admin_article_path(article), class: "text-decoration-none" do %>
+            <div class="card article-card h-100">
+              <div class="card-img-container">
+                <% if article.image.attached? %>
+                  <%= image_tag article.image, class: "card-img-top article-img" %>
+                <% else %>
+                  <%= image_tag "news.png", class: "card-img-top article-img" %>
                 <% end %>
               </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+              <div class="card-body">
+                <h4 class="card-title article-title"><%= article.title %></h4>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
       <div class="text-end">
         <%= link_to "すべての投稿を見る", admin_articles_path, class: "text-success" %>
       </div>
