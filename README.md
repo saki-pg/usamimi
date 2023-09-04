@@ -46,7 +46,6 @@
 | RSpec | model、request、systemテスト |
 | RuboCop | コードの静的解析 |
   
-  
 ***
 　　 
 ### **ER図**
@@ -73,7 +72,6 @@
 ![記事一覧](./RM_articles.jpg)
 　　 
 ***
-　　 
 　　 
 # **機能一般**
 | 機能名 | 詳細 |
