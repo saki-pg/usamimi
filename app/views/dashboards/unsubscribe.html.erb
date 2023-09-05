@@ -13,8 +13,8 @@
     <h3><%= current_user.email %></h3>
     <div class="d-flex">
       <!-- Changed here -->
-      <button class="btn btn-danger me-3" data-bs-toggle="modal" data-bs-target="#confirmModal">退会する</button>
-      <%= link_to '退会しない', root_path, class:'link-dark btn btn-light'%>
+      <%= link_to '退会しない', root_path, class:'link-dark btn btn-light me-3'%>
+      <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">退会する</button>
     </div>
 
     <!-- Modal -->
