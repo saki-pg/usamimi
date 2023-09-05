@@ -100,9 +100,9 @@ module Users
     # ユーザー登録成功時のフラッシュメッセージを設定
     def assign_flash_for(resource)
       if resource.active_for_authentication?
-        assign_flash_message! :notice, :signed_up
+        set_flash_message! :notice, :signed_up
       else
-        assign_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
       end
     end
   end
