@@ -3,4 +3,8 @@
     <h2 class="col-12 ms-2">質問投稿</h2>
   </div>
   <%= render 'form', question: @question %>
+
+  <div class="my-4">
+    <%= link_to '前のページに戻る', request.referer || root_path, class: "link-success me-3" %>
+  </div>
 </div>

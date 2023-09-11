@@ -3,7 +3,10 @@
   <h5>回答投稿:</h5>
   <%= @answer.body %><br>
 
-  <%= link_to "回答募集に戻る", answers_path, class: "btn btn-light my-3" %>
+  <div class="my-4">
+    <%= link_to "現在の回答投稿に戻る", new_question_answer_path(@question), class: "link-success me-3" %>
+    <%= link_to "回答募集一覧", answers_path, class: "link-success me-3" %>
+  </div>
 </div>
 
 

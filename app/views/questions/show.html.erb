@@ -8,11 +8,11 @@
 
       <div>
         <div class="my-3">
-          <% if current_user.image.attached? %>
-            <%= image_tag current_user.image, class: "rounded-circle", size: "60x60" %>
-          <% else %>
+          <% if @question.user.image.attached? %>
+            <%= image_tag @question.user.image, class: "rounded-circle", size: "60x60" %>
+          <%else%>
             <%= image_tag "rabbit_logo.png", class: "rounded-circle", size: "60x60" %>
-          <% end %>
+          <%end%>
           <span class="<%= "user_color" if current_user.id == @question.user_id %>">
             <%= @question.user.name %>
           </span><br>
@@ -68,11 +68,11 @@
           <div class="card-body  <%= "best-answer" if @question.best_answer_id == answer.id %>">
 
             <div class="my-3">
-              <% if current_user.image.attached? %>
-                <%= image_tag current_user.image, class: "rounded-circle", size: "60x60" %>
-              <% else %>
+              <% if answer.user.image.attached? %>
+                <%= image_tag answer.user.image, class: "rounded-circle", size: "60x60" %>
+              <%else%>
                 <%= image_tag "rabbit_logo.png", class: "rounded-circle", size: "60x60" %>
-              <% end %>
+              <%end%>
               <span class="<%= "user_color" if current_user.id == answer.user_id %>">
                 <%= answer.user.name %>
               </span><br>
@@ -170,7 +170,7 @@
   </div>
 
   <div class="my-4">
-    <%= link_to '質問投稿一覧に戻る', questions_path, class: "link-success" %>
+    <%= link_to '質問投稿一覧', questions_path, class: "link-success" %>
   </div>
 </div>
 

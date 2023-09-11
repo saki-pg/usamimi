@@ -70,6 +70,8 @@ ja:
         body: "内容"
       answer:
         body: "内容"
+      reaction:
+        body: "内容"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"

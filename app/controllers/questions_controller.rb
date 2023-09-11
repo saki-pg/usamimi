@@ -2,7 +2,6 @@
 
 # 質問の作成、読み取り、更新、削除、検索
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, except: %i[search]
   before_action :set_question, only: %i[show edit update destroy]
   before_action :set_best_answer, only: %i[update]
   before_action :ensure_correct_user, only: %i[edit update destroy]
@@ -69,18 +68,6 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to questions_url, notice: t('questions.delete.success') }
       format.json { head :no_content }
-    end
-  end
-
-  # 検索機能
-  def search
-    if params[:keyword].blank?
-      @question = Question.all
-      @cnt = Question.all.count
-    else
-      @question = Question.where('title LIKE?',
-                                 "%#{params[:keyword]}%").or(Question.where('body LIKE?', "%#{params[:keyword]}%"))
-      @cnt = @question.count
     end
   end
 

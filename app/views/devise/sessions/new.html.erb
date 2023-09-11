@@ -18,5 +18,9 @@
       <% end %>
     </div>
   </div>
+  <div class="my-4">
+    <%= link_to '前のページに戻る', request.referer || root_path, class: "link-success me-3" %>
+    <%= link_to "トップページ", root_path, class: "link-success me-3" %>
+  </div>
 </div>
 

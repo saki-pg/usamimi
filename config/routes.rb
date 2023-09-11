@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   patch 'account', to: 'dashboards#update'
 
   get 'questions' => 'questions#index'
-  get 'questions/search', to: 'questions#search'
+  get 'answers/search', to: 'answers#search'
   get 'answers' => 'answers#index'
 
   #タグ

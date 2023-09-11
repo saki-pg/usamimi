@@ -2,7 +2,7 @@
 
 # 質問に対する回答を管理するコントローラ
 class AnswersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[search]
   before_action :set_answer, only: %i[show edit update destroy]
   before_action :ensure_correct_user, only: %i[edit update destroy]
 
@@ -50,11 +50,24 @@ class AnswersController < ApplicationController
     end
   end
 
+  # 検索機能
+  def search
+    if params[:keyword].blank?
+      @questions = Question.all
+      @cnt = Questions.all.count
+    else
+      @questions = Question.where('title LIKE?',
+                                  "%#{params[:keyword]}%").or(Question.where('body LIKE?', "%#{params[:keyword]}%"))
+      @cnt = @questions.count
+    end
+  end
+
   private
 
   # アクション間で共通のセットアップまたは制約を共有するためのコールバックを使用する
   def set_answer
     @answer = Answer.find(params[:id])
+    @question = @answer.question
   end
 
   # 信頼できるパラメータのリストのみを通す

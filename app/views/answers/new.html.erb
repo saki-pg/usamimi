@@ -4,8 +4,8 @@
   </div>
 
   <div class="my-3">
-    <% if current_user.image.attached? %>
-      <%= image_tag current_user.image, class: "rounded-circle", size: "60x60" %>
+    <% if @question.user.image.attached? %>
+      <%= image_tag @question.user.image, class: "rounded-circle", size: "60x60" %>
     <%else%>
       <%= image_tag "rabbit_logo.png", class: "rounded-circle", size: "60x60" %>
     <%end%>
@@ -108,8 +108,8 @@
                           この回答を削除してよろしいですか？
                         </div>
                         <div class="modal-footer">
-                          <% if @answer.persisted? %>
-                            <%= link_to "削除", answer_path(@answer), method: :delete, class: "btn btn-danger" %>
+                          <% if answer.persisted? %>
+                            <%= link_to "削除", answer_path(answer), method: :delete, class: "btn btn-danger" %>
                           <% end %>
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
                         </div>
@@ -138,4 +138,10 @@
       <% end %>
     </div>
   </div>
+  <div class="my-4">
+    <%= link_to '前のページに戻る', request.referer || root_path, class: "link-success me-3" %>
+    <%= link_to "トップページ", root_path, class: "link-success me-3" %>
+    <%= link_to "回答募集一覧", answers_path, class: "link-success me-3" %>
+  </div>
 </div>
+

@@ -1,9 +1,11 @@
 <div class="container p-5">
   <p>
-    <strong>Body:</strong>
+    <strong>返信内容:</strong>
     <%= @reaction.body %>
   </p>
 
-  <%= link_to '現在の質問に戻る', question_path(@reaction.answer.question), class: "link-success" %><br>
-  <%= link_to '質問投稿一覧', questions_path, class: "link-success" %>
+  <div class="my-4">
+    <%= link_to '現在の質問に戻る', question_path(@reaction.answer.question), class: "link-success" %><br>
+    <%= link_to '質問投稿一覧', questions_path, class: "link-success" %>
+  </div>
 </div>

@@ -25,4 +25,8 @@
       </div>
     </div>
   <% end %>
+  <div class="my-4">
+    <%= link_to '現在の質問に戻る', question_path(@reaction.answer.question), class: "link-success me-3" %>
+    <%= link_to '質問投稿一覧', questions_path, class: "link-success me-3" %>
+  </div>
 </div>

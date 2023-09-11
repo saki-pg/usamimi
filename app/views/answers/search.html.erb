@@ -1,8 +1,8 @@
 <div class="question container justify-content-center p-5">
   <div class="row">
-    <% if @question.present? %>
+    <% if @questions.any? %>
       <h3 class="col-12 search-number">検索結果 <%= @cnt %>件です</h3>
-        <% @question.each do |question| %>
+        <% @questions.each do |question| %>
           <div class="col-12">
             <div class="question-search-frame">
               <div class="card">
@@ -15,7 +15,7 @@
                   <%= question.user.name %>
                 </div>
                 <div class="card-body">
-                  <%= link_to question_path(question.id),class:"question-link link-success" do %>
+                  <%= link_to new_question_answer_path(question), class:"question-link link-success" do %>
                     <div class="search-title card-title"><%= question.title %></div>
                   <% end %>
                   <div class="search-body card-text"><%= question.body %></div>
@@ -30,7 +30,8 @@
       </div>
     <% end %>
   </div>
+
+  <div class="my-4">
+    <%= link_to "トップページ", root_path, class: "link-success me-3" %>
+  </div>
 </div>
-
-
-
