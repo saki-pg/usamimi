@@ -9,7 +9,7 @@
     <%else%>
       <%= image_tag "rabbit_logo.png", class: "rounded-circle", size: "60x60" %>
     <%end%>
-    <span class="<%= "user_color" if current_user.id == @question.user_id %>">
+    <span class="<%= "user_color" if current_user && current_user.id == @question.user_id %>">
       <%= @question.user.name %>
     </span>
   </div>
@@ -28,7 +28,7 @@
     </div>
     <div>
       <% if @question.image.attached? %>
-        <%= image_tag @question.image, class: "article-img my-5" %>
+        <%= image_tag @question.image, class: "question-img my-5" %>
       <% end %>
     </div>
 
@@ -80,7 +80,7 @@
                   <%else%>
                     <%= image_tag "rabbit_logo.png", class: "rounded-circle", size: "60x60" %>
                   <%end%>
-                  <span class="<%= "user_color" if current_user.id == answer.user_id %>">
+                  <span class="<%= "user_color" if current_user && current_user.id == answer.user_id %>">
                     <%= answer.user.name %>
                   </span>
                 </div>

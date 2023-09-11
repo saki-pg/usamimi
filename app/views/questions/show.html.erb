@@ -13,7 +13,7 @@
           <%else%>
             <%= image_tag "rabbit_logo.png", class: "rounded-circle", size: "60x60" %>
           <%end%>
-          <span class="<%= "user_color" if current_user.id == @question.user_id %>">
+          <span class="<%= "user_color" if current_user && current_user.id == @question.user_id %>">
             <%= @question.user.name %>
           </span><br>
         </div>
@@ -28,15 +28,17 @@
         </div>
         <div>
           <% if @question.image.attached? %>
-            <%= image_tag @question.image, class: "article-img my-5" %>
+            <%= image_tag @question.image, class: "my-5 question-img" %>
           <% end %>
         </div>
       </div>
 
       <div>
-        <% if current_user.id == @question.user_id %>
-            <%= link_to_unless @question.best_answer_id, '編集', edit_question_path(@question), class: 'btn bg-light px-4' %>
-            <button type="button" class="btn btn-danger px-4" data-bs-toggle="modal" data-bs-target="#deleteModal">削除</button>
+        <% if current_user && current_user.id == @question.user_id %>
+          <div class="d-flex">
+            <%= link_to_unless @question.best_answer_id, '編集', edit_question_path(@question), class: 'btn bg-light me-1 px-3 btn-responsive' %>
+            <button type="button" class="btn btn-danger px-3 btn-responsive" data-bs-toggle="modal" data-bs-target="#deleteModal">削除</button>
+          </div>
 
           <!-- Modal -->
           <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -73,7 +75,7 @@
               <%else%>
                 <%= image_tag "rabbit_logo.png", class: "rounded-circle", size: "60x60" %>
               <%end%>
-              <span class="<%= "user_color" if current_user.id == answer.user_id %>">
+              <span class="<%= "user_color" if current_user && current_user.id == answer.user_id %>">
                 <%= answer.user.name %>
               </span><br>
             </div>
@@ -87,7 +89,7 @@
                       <div><%= reaction.body %></div>
 
 
-                      <% if current_user.id == reaction.user_id %>
+                      <% if current_user && current_user.id == reaction.user_id %>
                         <div style="text-align: right;">
                           <%= link_to "編集", edit_reaction_path(reaction), class: "btn btn-light" %>
                           <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-<%= reaction.id %>">
@@ -114,22 +116,20 @@
                           </div>
                         </div>
                       <% end %>
-
-
                     </div>
                   </div>
                 </div>
               </div>
               <br>
             <% end %>
-            <% if current_user.id == @question.user_id %>
+            <% if current_user && current_user.id == @question.user_id %>
               <p class="text-right"><%= link_to '返信する', new_answer_reaction_path(answer.id), class: 'link-success' %></p>
             <% end %>
           </div>
         </div>
       </div>
 
-      <div class="col-lg-1 col-md-1 ba-parent">
+      <div class="col-lg-1 col-md-1 ba-parent mb-3">
         <div class="ba-child text-center">
           <% if current_user == @question.user %>
             <%= form_with(model: @question, local: true, id: 'bestAnswerForm') do |form| %>
