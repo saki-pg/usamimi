@@ -10,6 +10,7 @@ ActiveAdmin.register Question do
       f.input :title
       f.input :body
       f.input :image, as: :file
+      f.input :tags, as: :check_boxes, collection: Tag.all
     end
     f.actions
   end

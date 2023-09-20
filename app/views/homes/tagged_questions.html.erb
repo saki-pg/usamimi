@@ -5,7 +5,13 @@
     <% @questions.each do |question| %>
       <div class="col-lg-3 col-md-6 mb-4">
         <div class="card h-100">
-          <%= image_tag "question.png", class: "card-img-top" %>
+          <div class="card-img-container">
+            <% if question.image.attached? %>
+              <%= image_tag question.image, class: "card-img-top" %>
+            <% else %>
+              <%= image_tag "question.png", class: "card-img-top" %>
+            <% end %>
+          </div>
           <div class="card-body">
             <h4 class="card-title question-title"><%= question.title %></h4>
             <p class="card-text question-body"><%= question.body %></p>
