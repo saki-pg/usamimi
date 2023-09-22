@@ -1,6 +1,6 @@
 # **README**
   
-![ロゴ画像](./RM_logo.jpg)
+![ロゴ画像](./app/assets/images/RM_logo.jpg)
   
 # **usamimi**
 うさぎの質問サイトです。
@@ -49,30 +49,30 @@
 ***
   
 ### **ER図**
-![ER図](./RM_er.png)
+![ER図](./app/assets/images/RM_er.png)
   
 ### **トップ画面**
-![トップ画面](./RM_top.png)
+![トップ画面](./app/assets/images/RM_top.png)
   
 ### **ログイン機能**
-![ログイン機能](./RM_signup.png)
+![ログイン機能](./app/assets/images/RM_signup.png)
   
-![ログイン機能](./RM_signin.png)
+![ログイン機能](./app/assets/images/RM_signin.png)
   
 ### **回答募集一覧**
-![回答募集一覧](./RM_answers.png)
+![回答募集一覧](./app/assets/images/RM_answers.png)
   
 ### **質問投稿一覧**
-![質問投稿一覧](./RM_questions.png)
+![質問投稿一覧](./app/assets/images/RM_questions.png)
   
 ### **質問投稿**
-![質問投稿画面](./RM_questions2.png)
+![質問投稿画面](./app/assets/images/RM_questions2.png)
   
 ### **回答投稿**
-![回答投稿画面](./RM_answers2.png)
+![回答投稿画面](./app/assets/images/RM_answers2.png)
   
 ### **記事一覧**
-![記事一覧](./RM_articles.png)
+![記事一覧](./app/assets/images/RM_articles.png)
   
 ***
   
